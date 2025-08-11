@@ -3,333 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>임정균님 맞춤형 '가상 위고비' 16주 몸짱 프로젝트</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>💉 위고비 없이 595만원 아끼며 몸짱되기</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&family=Noto+Sans+KR:wght@400;700;900&display=swap');
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-        :root {
-            --bg-color: #0f0c29;
-            --card-color: rgba(255, 255, 255, 0.05);
-            --text-color: #f0f0f0;
-            --primary-gradient: linear-gradient(45deg, #f953c6, #b91d73);
-            --secondary-gradient: linear-gradient(45deg, #00c6ff, #0072ff);
-            --disabled-color: #6c757d;
-            --font-display: 'Gasoek One', sans-serif;
-            --font-body: 'Noto Sans KR', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background: var(--bg-color);
-            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            line-height: 1.7;
-            margin: 0;
-            padding: 2rem;
-            overflow-x: hidden;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .top-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #ff0000, #ff6b6b);
+            padding: 15px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+            font-weight: 900;
+        }
+
+        .money-amount {
+            color: #FFD700;
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 80px auto 0;
+            padding: 20px;
         }
 
-        header {
+        .hero {
             text-align: center;
-            margin-bottom: 3rem;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(0,102,204,0.2) 0%, transparent 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
         }
 
-        header h1 {
-            font-family: var(--font-display);
-            font-size: 3.5rem;
-            background: var(--primary-gradient);
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #0066CC, #00CCFF, #FFD700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 15px rgba(249, 83, 198, 0.4);
         }
 
-        .progress-container {
-            background: var(--card-color);
-            border-radius: 50px;
-            padding: 5px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-            margin-bottom: 1rem;
+        .week-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .week-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .week-btn:hover {
+            background: rgba(0,102,204,0.3);
+            border-color: #0066CC;
+            transform: scale(1.05);
+        }
+
+        .week-btn.active {
+            background: #0066CC;
+            border-color: #0066CC;
+            box-shadow: 0 0 20px rgba(0,102,204,0.5);
+        }
+
+        .week-btn.completed {
+            background: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        .current-week-info {
+            background: rgba(0,102,204,0.1);
+            border: 2px solid #0066CC;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .dosage-info {
+            font-size: 24px;
+            color: #FFD700;
+            font-weight: 900;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,102,204,0.3);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 10px;
         }
 
         .progress-bar {
-            width: 0%;
-            height: 30px;
-            background: var(--secondary-gradient);
+            height: 10px;
+            background: rgba(255,255,255,0.1);
             border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 50px;
+            transition: width 1s ease;
+        }
+
+        .mission-section {
+            background: rgba(0,102,204,0.05);
+            border: 2px solid #0066CC;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .mission-title {
+            font-size: 24px;
             font-weight: 900;
-            font-size: 1rem;
-            transition: width 0.5s ease-in-out;
-            color: #fff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        #progress-text {
-            font-weight: 700;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: var(--card-color);
-            border-radius: 15px;
-            padding: 1.5rem 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        .card h2 {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-
-        .card h3 {
-            font-weight: 700;
-            color: #fff;
-            border-left: 4px solid;
-            border-image: var(--secondary-gradient) 1;
-            padding-left: 10px;
-            margin-top: 2rem;
-        }
-
-        ul.checklist {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul.checklist li {
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-        }
-
-        input[type="checkbox"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.5);
-            border-radius: 5px;
-            margin-right: 15px;
-            cursor: pointer;
-            position: relative;
-            top: -1px;
-            transition: all 0.2s ease;
-        }
-
-        input[type="checkbox"]:hover {
-            border-color: #00c6ff;
-        }
-
-        input[type="checkbox"]:checked {
-            background: var(--secondary-gradient);
-            border-color: #0072ff;
-        }
-
-        input[type="checkbox"]:checked + label {
-            text-decoration: line-through;
-            color: var(--disabled-color);
-        }
-
-        input[type="checkbox"]::after {
-            content: '\f00c'; /* Font Awesome check icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            font-size: 12px;
-            color: #fff;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.2s ease;
-        }
-
-        input[type="checkbox"]:checked::after {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        label {
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .money-card {
-            grid-column: span 1;
-        }
-
-        .money-card .total-savings {
-            font-size: 2.5rem;
-            font-weight: 900;
+            color: #0066CC;
+            margin-bottom: 20px;
             text-align: center;
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 1.5rem;
         }
 
+        .mission-grid { display: grid; gap: 15px; }
+
+        .mission-item {
+            display: flex; align-items: center; gap: 15px; padding: 20px;
+            background: rgba(255,255,255,0.05); border-radius: 10px;
+            cursor: pointer; transition: all 0.3s ease; user-select: none;
+        }
+
+        .mission-item:hover { background: rgba(0,102,204,0.2); transform: translateX(10px); }
+        .mission-item.completed { background: rgba(0,255,0,0.1); border: 1px solid rgba(0,255,0,0.3); }
+
+        .checkbox {
+            min-width: 30px; width: 30px; height: 30px; border: 3px solid #0066CC;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .mission-item.completed .checkbox { background: #28a745; border-color: #28a745; }
+        .mission-item.completed .checkbox::after { content: '✓'; color: white; font-size: 20px; font-weight: 900; }
+        .mission-icon { font-size: 30px; }
+        .mission-text { flex: 1; }
+        .mission-name { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+        .mission-desc { font-size: 14px; color: #999; }
+
+        .diet-section, .mindset-section { border-radius: 20px; padding: 30px; margin: 30px 0; }
+        .diet-section { background: rgba(255,215,0,0.05); border: 2px solid #FFD700; }
+        .mindset-section { background: linear-gradient(135deg, rgba(255,0,0,0.05), rgba(255,0,0,0.02)); border: 2px solid #FF6B6B; }
+        .diet-title, .mindset-title { font-size: 24px; font-weight: 900; margin-bottom: 20px; text-align: center; }
+        .diet-title { color: #FFD700; }
+        .mindset-title { color: #FF6B6B; }
+        .diet-content, .mindset-quote { white-space: pre-wrap; line-height: 1.8; font-size: 16px; }
+        .mindset-quote { padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; margin: 15px 0; }
+        .saju-warning { background: rgba(255,0,0,0.1); border: 2px solid #FF0000; border-radius: 15px; padding: 20px; margin: 20px 0; text-align: center; animation: pulse-red 2s infinite; }
+        @keyframes pulse-red { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+
+        .emergency-btn {
+            position: fixed; bottom: 30px; right: 30px; width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, #FF0000, #FF6B6B); border: none; color: white;
+            font-size: 14px; font-weight: 900; cursor: pointer; box-shadow: 0 5px 20px rgba(255,0,0,0.4);
+            z-index: 999; transition: all 0.3s ease; display: flex; align-items: center; text-align: center; justify-content: center;
+        }
+        .emergency-btn:hover { transform: scale(1.1); }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content { background: #1a1a1a; border: 3px solid #FF0000; border-radius: 20px; padding: 40px; max-width: 500px; text-align: center; }
+        .modal-title { font-size: 36px; font-weight: 900; color: #FF0000; margin-bottom: 20px; }
+        .modal-btn { background: linear-gradient(90deg, #0066CC, #00CCFF); border: none; color: white; padding: 15px 40px; font-size: 18px; font-weight: 700; border-radius: 50px; cursor: pointer; margin-top: 20px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 28px; }
+            .week-selector { gap: 5px; }
+            .week-btn { padding: 8px 15px; font-size: 14px; }
+            .emergency-btn { width: 60px; height: 60px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
+    <div class="top-banner">
+        💸 지금까지 절약한 금액: <span class="money-amount" id="totalSavings">₩0</span>
+    </div>
+
     <div class="container">
-        <header>
-            <h1>16-WEEK BODY PROJECT</h1>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar">0%</div>
-            </div>
-            <p id="progress-text">시작이 반이다! 첫 번째 목표를 체크해보세요.</p>
-        </header>
+        <div class="hero">
+            <h1>💉 위고비 없이 위고비처럼</h1>
+            <p style="margin: 20px 0; color: #999;">2026년 경술대운까지 <span style="color: #FFD700; font-weight: 700;" id="daysUntil"></span>일 | 임정균님 맞춤 플랜</p>
+            <div class="week-selector" id="weekSelector"></div>
+        </div>
 
-        <div class="dashboard">
-            <!-- Phase 1 -->
-            <div class="card">
-                <h2><i class="fa-solid fa-seedling"></i> Phase 1: 시스템 이식 (1-4주)</h2>
-                <ul class="checklist">
-                    <li><input type="checkbox" id="task1" data-week="1"><label for="task1">1주: 16:8 간헐적 단식 & 식사 기록</label></li>
-                    <li><input type="checkbox" id="task2" data-week="1"><label for="task2">1주: 매일 30분 걷기</label></li>
-                    <li><input type="checkbox" id="task3" data-week="2"><label for="task3">2주: 탄수화물 30% 감축 & 단백질 UP</label></li>
-                    <li><input type="checkbox" id="task4" data-week="2"><label for="task4">2주: 걷기 40분 & 홈트 시작</label></li>
-                    <li><input type="checkbox" id="task5" data-week="3"><label for="task5">3주: 저녁은 샐러드 위주, 복합 탄수화물로 교체</label></li>
-                    <li><input type="checkbox" id="task6" data-week="3"><label for="task6">3주: 헬스장 등록! 전신 근력 운동 시작</label></li>
-                    <li><input type="checkbox" id="task7" data-week="4"><label for="task7">4주: 목표 칼로리 설정 & 배달음식 금지</label></li>
-                    <li><input type="checkbox" id="task8" data-week="4"><label for="task8">4주: 운동 자세 집중 & 강도 UP</label></li>
-                </ul>
-            </div>
-            <!-- Phase 2 -->
-            <div class="card">
-                <h2><i class="fa-solid fa-bolt"></i> Phase 2: 가속화 (5-8주)</h2>
-                <ul class="checklist">
-                    <li><input type="checkbox" id="task9"><label for="task9">5주: 단백질 섭취 증대 (kg당 1.5g+)</label></li>
-                    <li><input type="checkbox" id="task10"><label for="task10">5주: 주 4회 2분할 근력 운동</label></li>
-                    <li><input type="checkbox" id="task11"><label for="task11">6주: 외식 시 건강 메뉴 선택</label></li>
-                    <li><input type="checkbox" id="task12"><label for="task12">6주: 인터벌 트레이닝 도입</label></li>
-                    <li><input type="checkbox" id="task13"><label for="task13">7주: 탄수화물 사이클링 시도</label></li>
-                    <li><input type="checkbox" id="task14"><label for="task14">7주: 운동 집중도 향상</label></li>
-                    <li><input type="checkbox" id="task15"><label for="task15">8주: 식단 자동화</label></li>
-                    <li><input type="checkbox" id="task16"><label for="task16">8주: 주 5회 운동 루틴 완성</label></li>
-                </ul>
-            </div>
-            <!-- Phase 3 -->
-            <div class="card">
-                <h2><i class="fa-solid fa-gem"></i> Phase 3: 조각 및 완성 (9-12주)</h2>
-                <ul class="checklist">
-                    <li><input type="checkbox" id="task17"><label for="task17">9주: 보충제(크레아틴) 활용</label></li>
-                    <li><input type="checkbox" id="task18"><label for="task18">9주: 주 4회 3분할 & 약점 공략</label></li>
-                    <li><input type="checkbox" id="task19"><label for="task19">10주: 주 1회 치팅밀 (폭식X)</label></li>
-                    <li><input type="checkbox" id="task20"><label for="task20">10주: 운동 강도 최대치 도전</label></li>
-                    <li><input type="checkbox" id="task21"><label for="task21">11주: 직관적 식사 연습</label></li>
-                    <li><input type="checkbox" id="task22"><label for="task22">11주: 바디 프로필 등 구체적 목표 설정</label></li>
-                    <li><input type="checkbox" id="task23"><label for="task23">12주: 지속가능 식단 패턴 확립</label></li>
-                    <li><input type="checkbox" id="task24"><label for="task24">12주: 최종 목표 달성 및 성과 측정</label></li>
-                </ul>
-            </div>
-            <!-- Phase 4 -->
-            <div class="card">
-                <h2><i class="fa-solid fa-infinity"></i> Phase 4: 유지 및 확장 (13-16주)</h2>
-                 <ul class="checklist">
-                    <li><input type="checkbox" id="task25"><label for="task25">13주: 유지 칼로리 찾기</label></li>
-                    <li><input type="checkbox" id="task26"><label for="task26">13주: 주 3~4회 운동 꾸준히</label></li>
-                    <li><input type="checkbox" id="task27"><label for="task27">14주: 균형 잡힌 식사 (주5일 건강, 2일 자유)</label></li>
-                    <li><input type="checkbox" id="task28"><label for="task28">14주: 새로운 운동 취미 탐색</label></li>
-                    <li><input type="checkbox" id="task29"><label for="task29">15주: 성과 리뷰 및 다음 목표 설정</label></li>
-                    <li><input type="checkbox" id="task30"><label for="task30">15주: 성공 경험 내재화</label></li>
-                    <li><input type="checkbox" id="task31"><label for="task31">16주: 디로딩 주간 (강도 70%)</label></li>
-                    <li><input type="checkbox" id="task32"><label for="task32">16주: 완전히 달라진 나를 축하하기!</label></li>
-                </ul>
-            </div>
+        <div class="current-week-info">
+            <h2 style="text-align: center; margin-bottom: 15px;"><span id="selectedWeekText">1주차</span> 프로그램</h2>
+            <div class="dosage-info">💉 가상 위고비 용량: <span id="currentDosage">0.25mg</span></div>
+        </div>
 
-            <div class="card money-card">
-                <h2><i class="fa-solid fa-piggy-bank"></i> 절약된 위고비 비용</h2>
-                <p>이 프로젝트를 통해 당신은 위고비 주사 없이 목표를 달성하며, 상당한 비용을 절약하고 있습니다. 이것이 당신의 의지력의 가치입니다!</p>
-                <div class="total-savings" id="totalSavings">₩ 5,952,400</div>
-                 <p style="text-align:center; font-size: 0.9rem; color: var(--disabled-color);">(16주 예상 약값 기준)</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">⚜️ 금(金) 에너지 - 시스템 준수도</div>
+                <div class="stat-value" style="color: #FFD700;" id="goldEnergy">0%</div>
+                <div class="progress-bar"><div class="progress-fill" id="goldProgress" style="width: 0%; background: linear-gradient(90deg, #FFD700, #FFA500);"></div></div>
             </div>
+            <div class="stat-card">
+                <div class="stat-label">🌳 목(木) 제어력 - 충동 억제</div>
+                <div class="stat-value" style="color: #4CAF50;" id="woodControl">0%</div>
+                <div class="progress-bar"><div class="progress-fill" id="woodProgress" style="width: 0%; background: linear-gradient(90deg, #4CAF50, #8BC34A);"></div></div>
+            </div>
+        </div>
 
-            <div class="card" style="grid-column: span 2;">
-                <h2><i class="fa-solid fa-lightbulb"></i> 실전 팁: 에너지 누수 방지</h2>
-                <h3><i class="fa-solid fa-angles-right"></i> 루틴을 시간에 박제하세요</h3>
-                <p>"예측 불가능"이 당신을 소모시킵니다. 아침 30분 걷기, 저녁 7시 웨이트처럼 고정된 루틴이 당신의 약이 될 것입니다.</p>
-                <h3><i class="fa-solid fa-angles-right"></i> 메뉴는 3개만, 디지털은 밤 11시 컷</h3>
-                <p>선택지가 많을수록 당신의 목(木) 기신이 폭주합니다. 메뉴는 3가지로 돌리고, 밤 11시 이후의 자극적인 영상과 알림은 에너지 누수의 주범이니 차단하세요.</p>
-                <h3><i class="fa-solid fa-angles-right"></i> 보상은 '금(金)의 기운'으로</h3>
-                <p>목표 달성 보상은 새 운동화, 벨트, PT 세션처럼 "도구/질서"에 관련된 것으로 하세요. 당신의 용신인 금(金)의 기운을 강화하는 최고의 방법입니다.</p>
+        <div class="mission-section"><div class="mission-title" id="missionTitle">📋 1주차 미션</div><div class="mission-grid" id="missionGrid"></div></div>
+        <div class="diet-section"><div class="diet-title">🍽️ 이번 주 식단 전략</div><div class="diet-content" id="dietContent"></div></div>
+        <div class="mindset-section"><div class="mindset-title">🧠 이번 주 마인드셋</div><div class="mindset-quote" id="mindsetQuote"></div><div class="saju-warning" id="sajuWarning"></div></div>
+    </div>
+
+    <button class="emergency-btn" onclick="showEmergency()">위기의<br>순간!</button>
+
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content">
+            <div class="modal-title">🚨 STOP!</div>
+            <div style="font-size: 20px; line-height: 1.6; margin: 20px 0;">
+                지금 포기하면<br><span style="color: #FFD700; font-size: 32px; font-weight: 900;">₩372,025</span>을<br>그냥 버리는 겁니다!<br><br><strong>즉시 실행:</strong><br>1️⃣ 물 500ml 원샷<br>2️⃣ 10분 산책 or 스쿼트 20개<br>3️⃣ 거울 보며 "난 할 수 있다" 10번
             </div>
+            <button class="modal-btn" onclick="closeEmergency()">알겠습니다! 바로 실행!</button>
         </div>
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progress-text');
-        const totalTasks = checkboxes.length;
-
-        const motivationalMessages = [
-            "훌륭한 시작입니다!",
-            "계속 나아가세요, 할 수 있습니다!",
-            "벌써 이만큼이나! 대단해요!",
-            "점점 변화가 느껴지시나요?",
-            "포기하지 마세요, 거의 다 왔습니다!",
-            "당신은 강합니다!",
-            "목표가 눈앞에 있습니다!",
-            "프로젝트 완성! 스스로를 자랑스러워하세요!"
+        const weeklyData = [
+            // Week 1-4: Phase 1
+            { dosage: "0.25mg", missions: [{ i: "⏰", t: "16:8 간헐적 단식", d: "12시~8시 식사, 야식/음주 금지" },{ i: "📝", t: "모든 식사 기록", d: "앱에 사진과 함께 기록" },{ i: "💧", t: "물 2L 마시기", d: "250ml씩 8번 나눠서" },{ i: "🚶", t: "매일 30분 걷기", d: "정해진 시간에 무조건 실행" }], diet: "• 3고(고단백·고섬유·고수분) 원칙\n• 간식은 견과 30g or 그릭요거트 1개로 고정", mindset: "\"나는 감정이 아닌 시스템으로 움직인다.\"", saju: "⚠️ 木(식상) 폭주 주의! 새로운 다이어트법 검색 금지. 정해진 플랜만 따르세요." },
+            { dosage: "0.25mg", missions: [{ i: "🥩", t: "탄수화물 30% 감축", d: "밥 2/3 공기로 줄이기" },{ i: "💪", t: "홈트 주 3회", d: "스쿼트, 푸시업 각 3세트" },{ i: "🚶", t: "걷기 40분으로 연장", d: "속도보다 시간이 중요" },{ i: "✍️", t: "미루기 즉시 차단", d: "2분 규칙 활용" }], diet: "• 단백질 섭취 의식적 증가 (계란, 닭가슴살)\n• 정제 탄수화물(흰밥, 빵) 피하기", mindset: "\"기록은 실행을 만든다.\"", saju: "⚠️ 유혹 주의! '이것만 먹을까?' 하는 木의 속삭임을 무시하세요." },
+            { dosage: "0.25mg", missions: [{ i: "🏋️", t: "헬스장 등록", d: "주 3회 전신 근력운동" },{ i: "🥗", t: "저녁은 샐러드+단백질", d: "저녁 탄수화물 제한" },{ i: "🍠", t: "복합 탄수화물로 전환", d: "흰밥→현미, 빵→고구마" },{ i: "🚫", t: "배달앱 삭제", d: "유혹의 근원 차단" }], diet: "• 운동 전후 탄수화물 집중 배치\n• 나트륨, 수분 섭취 조절 시작", mindset: "\"비효율은 나의 적이다.\"", saju: "⚠️ 사해충 발동 주의! '그만둘까?' 생각 들면 즉시 물 500ml 원샷!" },
+            { dosage: "0.25mg", missions: [{ i: "🎯", t: "목표 칼로리 설정", d: "TDEE -500kcal" },{ i: "🍱", t: "밀프렙 시작", d: "2~3가지 메뉴 로테이션" },{ i: "📈", t: "운동 강도 소폭 상향", d: "무게 or 횟수 점진적 증가" },{ i: "🎉", t: "4주 달성 자축", d: "운동 장비(金) 구매" }], diet: "• 주방저울 사용 시작\n• 주말 하루는 클린 식단 유지", mindset: "\"시스템이 나를 자유롭게 한다.\"", saju: "✅ 金 에너지 보충 완료! 실행력이 붙기 시작합니다." },
+            // Week 5-8: Phase 2
+            { dosage: "0.5mg", missions: [{ i: "🥩", t: "단백질 체중x1.6g+", d: "매 끼니 단백질 30g 이상" },{ i: "💪", t: "주 4회 2분할", d: "상체/하체 분할 운동" },{ i: "🏃", t: "인터벌 1회 추가", d: "10x(1분 빠르게/1분 천천히)" },{ i: "🚫", t: "가공식품 완전 차단", d: "원재료 형태 음식만 섭취" }], diet: "• 단백질 먼저 먹고 채소, 탄수화물 순으로 식사\n• 나트륨 섭취량 일정하게 유지", mindset: "\"불편함은 성장의 신호다.\"", saju: "⚠️ 번아웃 위험! 동시에 여러 프로젝트 벌이지 마세요. 일은 90분 딥워크 블록으로." },
+            { dosage: "0.5mg", missions: [{ i: "📊", t: "매주 사진 기록", d: "같은 조명, 같은 자세" },{ i: "📈", t: "총 볼륨 +10%", d: "세트x무게x횟수 증가" },{ i: "🧘", t: "스트레스 관리", d: "명상 or 산책 10분" },{ i: "🍳", t: "외식 시 건강 메뉴 선택", d: "구이, 회, 샐러드 위주" }], diet: "• 소스, 드레싱 주의\n• 충분한 수분 섭취 (3L 이상)", mindset: "\"나는 내 몸의 마케팅 전문가다.\"", saju: "⚠️ 예측 불가한 일이 피로를 폭증시킵니다. 약속과 일정을 미리 계획하세요." },
+            { dosage: "0.5mg", missions: [{ i: "🚴", t: "탄수화물 사이클링", d: "운동일에 탄수화물 집중" },{ i: "🧠", t: "운동 집중도 향상", d: "운동 중 스마트폰 금지" },{ i: "😴", t: "수면 7.5h+", d: "취침/기상 시간 고정" },{ i: "☕", t: "오후 카페인 컷", d: "숙면(水)을 위해" }], diet: "• 고강도 운동일: 체중x2g 탄수화물\n• 휴식일: 체중x1g 탄수화물", mindset: "\"사해충(변덕)을 통제한다.\"", saju: "⚠️ 갑자기 다 그만두고 싶을 때, 10분만 더 움직이세요." },
+            { dosage: "0.5mg", missions: [{ i: "🤖", t: "식단 자동화", d: "고민 없이 먹을 메뉴 3개 고정" },{ i: "🏆", t: "주 5회 운동 루틴 완성", d: "근력 3회, 인터벌 1회, 유산소 1회" },{ i: "👀", t: "눈바디로 성과 확인", d: "체중계 숫자에 연연하지 말기" },{ i: "🎉", t: "중간 목표 달성 보상", d: "새로운 운동화(金) 구매" }], diet: "• 2~3가지 메뉴를 로테이션하여 에너지 누수 방지\n• 식단 준비 시간 단축", mindset: "\"눈바디가 팩트다.\"", saju: "✅ 시스템이 몸에 장착되었습니다. 이제부턴 즐기세요." },
+            // Week 9-12: Phase 3
+            { dosage: "1.0mg", missions: [{ i: "🔥", t: "1RM 80% 도전", d: "주요 리프팅 중량 증진" },{ i: "🧗", t: "걷기 9k보 이상", d: "NEAT 증진" },{ i: "💊", t: "크레아틴 섭취", d: "운동 수행 능력 향상" },{ i: "🧐", t: "운동 자세 영상 촬영", d: "객관적 폼 체크" }], diet: "• 주 1회 리피드 데이 (유지칼로리)\n• 렙틴 리프레시로 정체기 극복", mindset: "\"고통은 지나가고 결과는 남는다.\"", saju: "⚠️ 정체기에 조급해하지 마세요. 원래 그런 겁니다. 묵묵히 金의 루틴을 따르세요." },
+            { dosage: "1.0mg", missions: [{ i: "🍽️", t: "주 1회 치팅밀", d: "폭식 금지, 1끼만" },{ i: "⛰️", t: "새로운 운동 탐색", d: "등산, 수영 등" },{ i: "🧠", t: "수행능력에 보상", d: "체중 말고 중량, 횟수, 걸음에 보상" },{ i: "🔄", t: "24시간 룰", d: "삐끗해도 24시간 내 복귀" }], diet: "• 치팅밀 후 다음날 클린 식단 복귀\n• 죄책감 없이 즐기기", mindset: "\"나는 실행하는 사람이다.\"", saju: "⚠️ 木의 충동이 치팅을 폭식으로 만듭니다. 딱 한 끼만 즐기세요." },
+            { dosage: "1.0mg", missions: [{ i: "🤔", t: "직관적 식사 연습", d: "칼로리 계산 없이 양 조절" },{ i: "📸", t: "바디 프로필 목표 설정", d: "구체적인 목표 설정" },{ i: "🧘", t: "마음챙김 연습", d: "식사, 운동에 집중" },{ i: "📚", t: "운동/영양 공부", d: "지식(金)으로 무장" }], diet: "• 배고픔과 배부름 신호에 집중\n• 천천히 씹고 음미하기", mindset: "\"창의성은 절제 속에서 빛난다.\"", saju: "⚠️ 아이디어가 넘칠 때입니다. 이걸 운동 루틴이나 건강 레시피 개발에 쓰세요." },
+            { dosage: "1.0mg", missions: [{ i: "✅", t: "최종 점검", d: "12주 성과 측정" },{ i: "🍽️", t: "지속가능 식단 확립", d: "평생 할 수 있는 패턴 찾기" },{ i: "💪", t: "최애 운동 찾기", d: "가장 즐거운 운동" },{ i: "🎉", t: "12주 완주 자축", d: "PT 세션(金) 등록" }], diet: "• 사회생활, 외식 포함한 식단 계획\n• 나만의 필승 클린 메뉴 만들기", mindset: "\"나는 완전히 달라졌다.\"", saju: "✅ 2026년 대운을 맞이할 준비가 되었습니다. 자신감을 가지세요." },
+            // Week 13-16: Phase 4
+            { dosage: "1.7mg", missions: [{ i: "⚖️", t: "유지 칼로리 찾기", d: "체중 변화 보며 칼로리 조절" },{ i: "🔄", t: "운동 루틴 유지", d: "주 3-4회 꾸준히" },{ i: "😋", t: "주 2일 자유식", d: "주 5일 클린, 2일 자유" },{ i: "📖", t: "다음 사이클 설계", d: "새로운 목표 설정" }], diet: "• 염분, 수분, 섬유질 섭취 일정하게\n• 변동성 최소화로 몸 상태 파악", mindset: "\"이제 다이어트가 아닌 라이프스타일이다.\"", saju: "⚠️ 안정감이 높아지는 시기. 루틴을 몸의 OS로 만드세요." },
+            { dosage: "1.7mg", missions: [{ i: "🧗", t: "새로운 운동 취미", d: "클라이밍, 크로스핏 등" },{ i: "🤝", t: "운동 파트너 찾기", d: "함께 성장하기" },{ i: "🧠", t: "성공 경험 내재화", d: "자신감으로 연결" },{ i: "🎉", t: "변화된 몸으로 쇼핑", d: "새로운 스타일 도전" }], diet: "• 80/20 법칙 (80% 건강식, 20% 자유식)\n• 스트레스 없는 식단", mindset: "\"나는 계획하고 실행하여 결과를 만드는 사람이다.\"", saju: "⚠️ 木의 사교성을 긍정적으로 활용하세요. 운동 모임에 나가보세요." },
+            { dosage: "1.7mg", missions: [{ i: "📉", t: "체지방률 목표 설정", d: "체중보다 체성분에 집중" },{ i: "💪", t: "근력 유지에 집중", d: "최소 주 2회 근력 운동" },{ i: "🧘", t: "능동적 휴식", d: "가벼운 산책, 스트레칭" },{ i: "📝", t: "성과 리뷰", d: "허리둘레, 사진 비교" }], diet: "• 단백질 섭취량은 꾸준히 높게 유지\n• 건강한 지방 섭취 늘리기 (아보카도, 견과류)", mindset: "\"내 몸의 주인은 나다.\"", saju: "✅ 꾸준함(金)이 당신의 것이 되었습니다." },
+            { dosage: "1.7mg", missions: [{ i: "📉", t: "디로딩 주간", d: "운동 강도 70%로" },{ i: "🎉", t: "16주 완주! 최종 보상", d: "가장 원했던 장비/교육(金) 선물" },{ i: "📈", t: "다음 16주 계획", d: "새로운 목표 설정" },{ i: "🙏", t: "스스로에게 감사하기", d: "놀라운 여정을 마친 자신을 칭찬" }], diet: "• 편안하게 즐기되, 폭식은 금물\n• 보상을 음식으로 하지 않기", mindset: "\"이 성공은 시작일 뿐이다.\"", saju: "🎉 2026년 황금기를 맞이할 그릇이 완성되었습니다. 축하합니다!" }
         ];
 
-        function updateProgress() {
-            const checkedTasks = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
-            const progressPercentage = totalTasks > 0 ? Math.round((checkedTasks / totalTasks) * 100) : 0;
+        const SAVINGS_PER_WEEK = 372025;
+        let state = {
+            currentWeek: 0,
+            completedMissions: {}
+        };
 
-            progressBar.style.width = progressPercentage + '%';
-            progressBar.textContent = progressPercentage + '%';
-
-            const messageIndex = Math.floor(progressPercentage / (100 / (motivationalMessages.length -1)));
-            progressText.textContent = motivationalMessages[messageIndex] || "프로젝트를 시작하세요!";
-
-            // Save to localStorage
-            checkboxes.forEach(checkbox => {
-                localStorage.setItem(checkbox.id, checkbox.checked);
-            });
-        }
-
-        function loadProgress() {
-            checkboxes.forEach(checkbox => {
-                const isChecked = localStorage.getItem(checkbox.id) === 'true';
-                checkbox.checked = isChecked;
-            });
-            updateProgress();
-        }
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateProgress);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            initDaysUntil();
+            initWeekSelector();
+            renderWeek(state.currentWeek);
+            updateStats();
         });
 
-        // Load progress on page load
-        loadProgress();
-    });
+        function initDaysUntil() {
+            const targetDate = new Date('2026-02-04'); // 경술대운 시작일 (예시)
+            const today = new Date();
+            const diffTime = targetDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('daysUntil').textContent = diffDays > 0 ? diffDays : 0;
+        }
+
+        function initWeekSelector() {
+            const selector = document.getElementById('weekSelector');
+            selector.innerHTML = '';
+            for (let i = 0; i < 16; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'week-btn';
+                btn.textContent = `${i + 1}주`;
+                btn.dataset.week = i;
+                if (i === state.currentWeek) btn.classList.add('active');
+
+                const weekMissions = weeklyData[i].missions.map((_, j) => `${i}-${j}`);
+                const allComplete = weekMissions.every(id => state.completedMissions[id]);
+                if (allComplete) btn.classList.add('completed');
+
+                btn.addEventListener('click', () => {
+                    state.currentWeek = i;
+                    document.querySelector('.week-btn.active').classList.remove('active');
+                    btn.classList.add('active');
+                    renderWeek(i);
+                    saveState();
+                });
+                selector.appendChild(btn);
+            }
+        }
+
+        function renderWeek(weekIndex) {
+            const data = weeklyData[weekIndex];
+            document.getElementById('selectedWeekText').textContent = `${weekIndex + 1}주차`;
+            document.getElementById('currentDosage').textContent = data.dosage;
+            document.getElementById('missionTitle').textContent = `📋 ${weekIndex + 1}주차 미션`;
+            document.getElementById('dietContent').textContent = data.diet;
+            document.getElementById('mindsetQuote').textContent = data.mindset;
+            document.getElementById('sajuWarning').textContent = data.saju;
+
+            const missionGrid = document.getElementById('missionGrid');
+            missionGrid.innerHTML = '';
+            data.missions.forEach((mission, missionIndex) => {
+                const id = `${weekIndex}-${missionIndex}`;
+                const isCompleted = state.completedMissions[id];
+                const item = document.createElement('div');
+                item.className = 'mission-item';
+                if (isCompleted) item.classList.add('completed');
+                item.innerHTML = `
+                    <div class="checkbox"></div>
+                    <div class="mission-icon">${mission.i}</div>
+                    <div class="mission-text">
+                        <div class="mission-name">${mission.t}</div>
+                        <div class="mission-desc">${mission.d}</div>
+                    </div>
+                `;
+                item.addEventListener('click', () => toggleMission(id, item));
+                missionGrid.appendChild(item);
+            });
+        }
+
+        function toggleMission(id, element) {
+            state.completedMissions[id] = !state.completedMissions[id];
+            element.classList.toggle('completed');
+            updateStats();
+            checkWeekCompletion();
+            saveState();
+        }
+
+        function checkWeekCompletion() {
+            const weekIndex = state.currentWeek;
+            const weekMissions = weeklyData[weekIndex].missions.map((_, j) => `${weekIndex}-${j}`);
+            const allComplete = weekMissions.every(id => state.completedMissions[id]);
+            const weekBtn = document.querySelector(`.week-btn[data-week='${weekIndex}']`);
+            if (allComplete) {
+                weekBtn.classList.add('completed');
+            } else {
+                weekBtn.classList.remove('completed');
+            }
+        }
+
+        function updateStats() {
+            const totalMissions = weeklyData.reduce((acc, week) => acc + week.missions.length, 0);
+            const completedCount = Object.values(state.completedMissions).filter(Boolean).length;
+            const progress = totalMissions > 0 ? (completedCount / totalMissions) * 100 : 0;
+
+            // 금(金) 에너지: 전체 진행도
+            const goldEnergy = progress;
+            document.getElementById('goldEnergy').textContent = `${Math.round(goldEnergy)}%`;
+            document.getElementById('goldProgress').style.width = `${goldEnergy}%`;
+
+            // 목(木) 제어력: 현재 주차 진행도
+            const currentWeekMissions = weeklyData[state.currentWeek].missions;
+            const currentWeekMissionIds = currentWeekMissions.map((_, j) => `${state.currentWeek}-${j}`);
+            const currentWeekCompleted = currentWeekMissionIds.filter(id => state.completedMissions[id]).length;
+            const woodControl = currentWeekMissions.length > 0 ? (currentWeekCompleted / currentWeekMissions.length) * 100 : 0;
+            document.getElementById('woodControl').textContent = `${Math.round(woodControl)}%`;
+            document.getElementById('woodProgress').style.width = `${woodControl}%`;
+
+            // 누적 절약 금액
+            const completedWeeks = weeklyData.map((week, i) => {
+                const weekMissions = week.missions.map((_, j) => `${i}-${j}`);
+                return weekMissions.every(id => state.completedMissions[id]);
+            }).filter(Boolean).length;
+            const totalSavings = completedWeeks * SAVINGS_PER_WEEK;
+
+            const savingsElement = document.getElementById('totalSavings');
+            const currentSavings = parseInt(savingsElement.textContent.replace(/[^0-9]/g, '')) || 0;
+            animateValue(savingsElement, currentSavings, totalSavings, true);
+        }
+
+        function animateValue(element, start, end, isCurrency) {
+            if (start === end) return;
+            const duration = 1000;
+            const range = end - start;
+            let current = start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+
+            const timer = setInterval(() => {
+                current += increment * Math.ceil(range / 100);
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.textContent = isCurrency ? `₩${current.toLocaleString()}` : current;
+            }, 10);
+        }
+
+        function saveState() {
+            localStorage.setItem('projectState', JSON.stringify(state));
+        }
+
+        function loadState() {
+            const savedState = localStorage.getItem('projectState');
+            if (savedState) {
+                state = JSON.parse(savedState);
+            }
+        }
+
+        function showEmergency() { document.getElementById('emergencyModal').classList.add('active'); }
+        function closeEmergency() { document.getElementById('emergencyModal').classList.remove('active'); }
+
     </script>
 </body>
 </html>
