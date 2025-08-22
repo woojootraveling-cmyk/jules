@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #f4f1ea;
+    --text-color: #3d3d3d;
+    --primary-accent: #b71c1c; /* Faded, serious red */
+    --secondary-accent: #004d40; /* Deep, clinical teal */
+    --border-color: #dcdcdc;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--secondary-accent);
+}
+
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-bottom: 2px solid var(--border-color);
+    background-color: #ffffff;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: var(--primary-accent);
+}
+
+header .subtitle {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0;
+    color: var(--text-color);
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+/* Hero Animation Section */
+#hero {
+    text-align: center;
+}
+
+#animation-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: #f9f9f9;
+    border: 1px dashed var(--primary-accent);
+    min-height: 100px;
+    position: relative;
+}
+
+#arrow-user {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-accent);
+}
+
+#wall-of-fluff {
+    display: flex;
+    flex-direction: column;
+    color: #777;
+}
+
+#wall-of-fluff span {
+    margin: 0.2rem 0;
+    font-style: italic;
+}
+
+#deflected-point {
+    font-size: 1.2rem;
+    color: #999;
+    opacity: 0; /* Will be animated */
+}
+
+.hero-caption {
+    font-style: italic;
+    color: var(--text-color);
+    margin-top: 1rem;
+}
+
+
+/* Symptoms Section */
+.symptom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.symptom-card {
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.symptom-card h3 {
+    margin-top: 0;
+    color: var(--primary-accent);
+}
+
+/* Case Study Section */
+.chat-container {
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    font-family: monospace;
+}
+
+.chat-container p {
+    margin: 0.5rem 0;
+}
+
+.chat-container .ai-response {
+    color: #555;
+    padding-left: 1rem;
+    border-left: 3px solid var(--secondary-accent);
+}
+
+.chat-container .ai-response.final {
+    font-weight: bold;
+    color: var(--primary-accent);
+    border-left-color: var(--primary-accent);
+}
+
+.case-study-analysis {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #fffbe5;
+    border: 1px solid #ffeeba;
+}
+
+/* Alternatives Section */
+.brands {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.brand-card {
+    flex: 1;
+    padding: 1.5rem;
+    border: 2px solid;
+    text-align: center;
+}
+
+.brand-card.qwen {
+    border-color: var(--secondary-accent);
+}
+
+.brand-card.other {
+    border-color: var(--border-color);
+}
+
+.brand-card h3 {
+    margin-top: 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+    border-top: 1px solid var(--border-color);
+}
