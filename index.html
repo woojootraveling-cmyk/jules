@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Information Sentinel | Report Ver 5.1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <!-- INTRO: Mission Start -->
+        <section id="intro" class="briefing-section">
+            <div class="terminal">
+                <p class="terminal-text"></p>
+                <button id="begin-briefing" class="hidden">BEGIN BRIEFING</button>
+            </div>
+        </section>
+
+        <main id="report-content" class="hidden">
+            <!-- SECTION 1: Battlefield Analysis -->
+            <section id="battlefield" class="briefing-section">
+                <h1 class="section-title">1. 전장 분석 및 위협 평가</h1>
+                <div class="content-box">
+                    <h2>[주장 해부 및 초기 평가]</h2>
+                    <p class="claim">"40세 미만 남성에게서 발생하는 혈뇨는 주로 방광 감염(방광염)의 징후이며, 회음부 통증은 전립선 감염(전립선염)의 징후이다."</p>
+                    <hr>
+                    <h2>🚨 전장 분석: '기울어진 운동장'</h2>
+                    <p>이 사안이 다루는 전장은 '대중 건강 정보' 영역입니다. 이곳은 전문 의료 정보의 복잡성과 '즉각적이고 간단한 해답'을 원하는 대중의 심리가 충돌하는, 고도로 적대적인 환경입니다. 과학적 엄밀함보다 감성적 위안이나 충격 요법이 더 잘 통용됩니다.</p>
+
+                    <h2>적대적 세력: '건강 염려-상업주의 복합체'</h2>
+                    <div id="cartel-diagram-container">
+                        <div id="cartel-diagram">
+                            <!-- JS will populate this -->
+                        </div>
+                    </div>
+
+                    <h2>위협 수준: <span id="threat-level" class="level-severe">심각 (Severe)</span></h2>
+                    <p>이 카르텔이 유포하는 오정보는 질병의 조기 진단 기회를 놓치게 하여 치명적인 결과를 초래할 수 있습니다. 특히 암과 같은 중대 질환의 신호를 '사소한 감염'으로 오인하게 만드는 것은 생명과 직결된 위협입니다.</p>
+                </div>
+            </section>
+
+            <!-- SECTION 2: The 5 Whys -->
+            <section id="investigation" class="briefing-section">
+                <h1 class="section-title">2. 탐사 여정: 검증의 5 WHY</h1>
+                <div class="content-box">
+                    <div id="why-accordion">
+                        <!-- JS will populate this -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Psychological Warfare -->
+            <section id="psy-ops" class="briefing-section">
+                <h1 class="section-title">4. 심리적 동인 및 서사 분석</h1>
+                <div class="content-box">
+                    <h2>핵심 서사: '미스터리 해결사'</h2>
+                    <p>기존 정보는 독자의 불안(증상)을 '단순한 진단'으로 해결해주는 '미스터리 해결사' 서사를 사용합니다. 이 과정에서 독자는 안도감과 지적 만족감을 느끼지만, 정작 중요한 위험은 간과하게 됩니다.</p>
+                    <hr>
+                    <h2>🚨 역프레임 설계: 현명한 투자 vs 위험한 도박</h2>
+                    <p>우리는 '진단'의 개념을 '질병 확인'에서 '불확실성 제거'로 재설정하여 전장의 구도를 바꿉니다. 이것은 건강과 질병의 문제가 아니라, 두 가지 선택의 문제입니다.</p>
+                    <div id="counter-frame">
+                        <div class="frame-path" id="gamble-path">
+                            <h3>위험한 도박 (Risky Gamble)</h3>
+                            <p>인터넷의 추측에 당신의 미래를 건다.</p>
+                            <div class="path-icon">🎲</div>
+                        </div>
+                        <div class="frame-path" id="investment-path">
+                            <h3>현명한 투자 (Smart Investment)</h3>
+                            <p>전문가의 진단으로 불확실성을 제거한다.</p>
+                            <div class="path-icon">🛡️</div>
+                        </div>
+                    </div>
+                    <p class="reframe-message">새로운 서사는 병원 방문을 '아픈 사람이 가는 곳'이 아닌, '자신의 삶을 주도적으로 관리하는 유능한 사람이 정보를 얻는 곳'으로 리포지셔닝합니다. 이는 공포가 아닌 책임감과 현명한 의사결정자로서의 자부심을 자극합니다.</p>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Commander Mode -->
+            <section id="strategy" class="briefing-section">
+                <h1 class="section-title">5. 최종 판결 및 전략 설계</h1>
+                <div class="content-box">
+                    <h2>[사실 기반 결론]</h2>
+                    <p>"40세 미만 남성의 혈뇨는 주로 방광 감염의 징후"라는 주장은 사실이 아니며, 잠재적으로 생명을 위협할 수 있는 심각한 <span class="highlight-red">오도(Misleading) 정보</span>입니다.</p>
+                    <div id="verdict-stamp" class="stamp-hidden">심각한 오도 정보</div>
+
+                    <hr>
+
+                    <h2>[배후 세력 및 조작 폭로]</h2>
+                    <p>이 정보 왜곡의 배후에는 '건강 염려-상업주의 복합체' 카르텔이 존재합니다. 그들의 플레이북은 다음과 같습니다.</p>
+                    <ul id="playbook">
+                        <li class="playbook-item"><span>1. 권위 차용:</span> 저명한 전문가의 이름을 빌려 신뢰도를 포장한다.</li>
+                        <li class="playbook-item"><span>2. 공포 자극:</span> 위협적인 증상을 제시해 불안감을 증폭시킨다.</li>
+                        <li class="playbook-item"><span>3. 단순화된 안심 제공:</span> 가짜 안도감을 판매한다.</li>
+                        <li class="playbook-item"><span>4. 상업적 기회 창출:</span> '스스로 진단하는 대중'에게 상품을 판매할 시장을 연다.</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>💡 [전략적 대응 방안] - 작전명: 확실성의 방패</h2>
+                    <p><strong>목표:</strong> '병원 진단'의 개념을 '질병 치료'에서 '불확실성 제거를 통한 삶의 통제권 확보'로 재정의합니다.</p>
+                    <div id="operation-details">
+                        <div class="operation-item">🗺️ <strong>전장 재설정:</strong> "아픈가?"가 아닌 "사실에 의존하겠습니까?"라는 새로운 질문을 던집니다.</div>
+                        <div class="operation-item">🏆 <strong>국민의 증거 활용:</strong> 조기 진단으로 삶을 구한 평범한 사람들의 '현명한 판단'을 조명합니다.</div>
+                        <div class="operation-item">🗣️ <strong>메신저 다변화:</strong> 의사 외에 경제, 리스크 관리 전문가를 활용해 '건강은 최고의 투자'임을 강조합니다.</div>
+                        <div class="operation-item">📜 <strong>'정보 처방전' 캠페인:</strong> 오정보에 대한 면역력을 선제적으로 기르는 '백신'을 제공합니다.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OUTRO: Your Mission -->
+            <section id="outro" class="briefing-section">
+                <h1 class="section-title">Your Mission</h1>
+                <div class="content-box">
+                    <p>당신의 임무는 이 브리핑을 공유하여 주변 사람들을 위한 '확실성의 방패'가 되는 것입니다.</p>
+                    <div class="share-buttons">
+                        <button id="copy-link-btn">링크 복사</button>
+                        <button disabled>X에 공유 (구현 예정)</button>
+                        <button disabled>Facebook에 공유 (구현 예정)</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
