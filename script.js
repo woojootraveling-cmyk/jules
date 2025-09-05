@@ -219,9 +219,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
-    // Observe all sections within the main content
-    reportContent.querySelectorAll('.briefing-section').forEach(section => {
-        observer.observe(section);
+    // Observe all sections
+    document.querySelectorAll('.briefing-section').forEach(section => {
+        // The intro section should be visible immediately, others will fade in on scroll.
+        if (section.id !== 'intro') {
+            observer.observe(section);
+        } else {
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+        }
     });
 
 });
