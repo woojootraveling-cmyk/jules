@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seoul English Meetup: Real Conversations</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #00a8ff;
+            --secondary-color: #9c88ff;
+            --background-color: #1e272e;
+            --content-bg-color: #2f3640;
+            --text-color: #f5f6fa;
+            --card-bg-color: #353b48;
+            --border-color: #485460;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: var(--content-bg-color);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            background-size: 200% 200%;
+            animation: gradient-animation 10s ease infinite;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            animation: slideInDown 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s;
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--background-color);
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 14px 28px;
+            margin: 5px;
+            border: none;
+            background-color: transparent;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+            transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .tab-button:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active {
+            color: var(--secondary-color);
+        }
+
+        .tab-button.active::after {
+            width: 70%;
+        }
+
+        .content-area {
+            padding: 40px 50px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            color: var(--secondary-color);
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .transcript-dialog {
+            margin-bottom: 1.5em;
+            padding: 1em;
+            border-left: 4px solid var(--secondary-color);
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .speaker {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .korean-text {
+            color: #bdc3c7;
+            font-style: italic;
+            font-size: 0.95em;
+            margin-left: 1em;
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .upgrade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .upgrade-table th, .upgrade-table td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .upgrade-table th {
+            background-color: #2c3e50;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        .upgrade-table td {
+             background-color: var(--card-bg-color);
+        }
+        .upgrade-table .upgraded {
+            color: #2ecc71;
+            font-weight: 500;
+        }
+
+        .correction-note {
+            margin: 25px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+        .correction-note:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+        }
+
+        .correction-note .original, .correction-note .corrected, .correction-note .explanation {
+            padding: 18px;
+        }
+
+        .correction-note .original {
+            background-color: rgba(231, 76, 60, 0.15);
+            color: #e74c3c;
+            border-bottom: 1px solid #e74c3c;
+        }
+
+        .correction-note .corrected {
+            background-color: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+        }
+
+        .correction-note .explanation {
+            background-color: var(--card-bg-color);
+            font-size: 0.95em;
+            color: #bdc3c7;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+        }
+
+        ul.check-list li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            font-size: 1.1em;
+        }
+
+        .vocab-list .term {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .vocab-list .definition {
+            font-size: 0.95em;
+            color: #ecf0f1;
+            padding-left: 10px;
+        }
+
+        .deeper-questions li::before {
+            content: '🤔';
+            position: absolute;
+            left: 0;
+            font-size: 1.1em;
+        }
+
+        .deeper-questions li {
+            background-color: #353b48;
+            padding: 18px;
+            border-radius: 8px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>💬 Seoul English Meetup: Real Conversations</h1>
+            <p><strong>Topic:</strong> Hobbies, Travel, and Life Stories</p>
+        </header>
+
+        <div class="tabs-nav">
+            <button class="tab-button" onclick="showTab('transcript', this)">🎙️ Full Transcript</button>
+            <button class="tab-button" onclick="showTab('sera', this)">👤 Sera</button>
+            <button class="tab-button" onclick="showTab('sony', this)">👤 Sony</button>
+            <button class="tab-button" onclick="showTab('luke', this)">👤 Luke</button>
+            <button class="tab-button" onclick="showTab('ruby', this)">👤 Ruby</button>
+            <button class="tab-button" onclick="showTab('hyundong', this)">👤 Hyundong</button>
+        </div>
+
+        <div class="content-area">
+
+            <div id="transcript" class="tab-content">
+                <h2>Full Conversation Transcript</h2>
+                <div class="transcript-dialog">
+                    <p><span class="speaker">Sera:</span> Okay, so, turn around and then ask her one thing.</p>
+                    <p class="korean-text">좋아요, 그럼 돌아서서 그녀에게 한 가지 물어보세요.</p>
+                    <p><span class="speaker">Sony:</span> Why did you choose to participate in this meeting?</p>
+                    <p class="korean-text">왜 이 모임에 참여하기로 선택했나요?</p>
+                    <p><span class="speaker">Sera:</span> This meeting? Yes.</p>
+                    <p class="korean-text">이 모임이요? 네.</p>
+                    <p><span class="speaker">Sera:</span> Actually, I've been to a place called YNA, do you know it?</p>
+                    <p class="korean-text">사실, YNA라는 곳에 가봤는데, 아세요?</p>
+                    <p><span class="speaker">Sera:</span> Maybe he knows YNA.</p>
+                    <p class="korean-text">아마 이분은 YNA를 아실 거예요.</p>
+                    <p><span class="speaker">Luke:</span> I don't know.</p>
+                    <p class="korean-text">몰라요.</p>
+                    <p><span class="speaker">Sera:</span> The YNA is in Hongdae, it's a very, very big gathering...</p>
+                    <p class="korean-text">YNA는 홍대에 있는데, 아주 아주 큰 모임이에요...</p>
+                    <p><span class="speaker">Luke:</span> I have never participated in that, though I was interested. This is my first time, so I don't know.</p>
+                    <p class="korean-text">한 번도 참여해 본 적이 없어요. 관심은 있었는데. 이번이 처음이라서 잘 몰라요.</p>
+                    <p><span class="speaker">Sera:</span> So I wanted something more cozy and in a small group.</p>
+                    <p class="korean-text">그래서 저는 좀 더 아늑하고 소규모 그룹 같은 걸 원했어요.</p>
+                    <p><span class="speaker">Sera:</span> And without alcohol, so...</p>
+                    <p class="korean-text">그리고 술 없이요. 그래서...</p>
+                    <p><span class="speaker">Luke:</span> It's always like that. For girls, they ask for everything they want.</p>
+                    <p class="korean-text">항상 그래요. 여자들은 자기가 원하는 걸 다 요구하죠.</p>
+                    <p><span class="speaker">Luke:</span> You guys know that, but for guys... it's like that every time. This is the Korean style. But you have to do that.</p>
+                    <p class="korean-text">여러분은 아시겠지만, 남자들은... 매번 그렇죠. 이게 한국 스타일이에요. 하지만 그렇게 해야 해요.</p>
+                    <p><span class="speaker">Sony:</span> Yeah.</p>
+                    <p class="korean-text">네.</p>
+                    <p><span class="speaker">Sera:</span> Are you reading something?</p>
+                    <p class="korean-text">뭐 읽고 계세요?</p>
+                    <p><span class="speaker">Sony:</span> Do you think you are good at English?</p>
+                    <p class="korean-text">영어를 잘한다고 생각하세요?</p>
+                    <p><span class="speaker">Sera:</span> Oh, yes. I really want to improve my English, and I just got my TOEIC speaking result. I got the intermediate-high level.</p>
+                    <p class="korean-text">오, 네. 정말 영어를 향상시키고 싶은데, 방금 토익 스피킹 결과를 받았는데 중상급(Intermediate-High) 레벨이 나왔어요.</p>
+                    <p><span class="speaker">Luke:</span> Wow, that's nice.</p>
+                    <p class="korean-text">와, 좋네요.</p>
+                    <p><span class="speaker">Sera:</span> Yeah, but I want to get the advanced level score. That's why I'm trying again.</p>
+                    <p class="korean-text">네, 하지만 고급(Advanced) 레벨 점수를 받고 싶어요. 그래서 다시 도전하는 거예요.</p>
+                    <p><span class="speaker">Luke:</span> You mean TOEIC Speaking is the same as OPIC?</p>
+                    <p class="korean-text">토익 스피킹이 오픽이라는 말인가요?</p>
+                    <p><span class="speaker">Sera:</span> No, no, TOEIC Speaking. Oh, they're different.</p>
+                    <p class="korean-text">아니요, 토익 스피킹이요. 아, 다른 거예요.</p>
+                    <p><span class="speaker">Sony:</span> So you are not at an advanced level now?</p>
+                    <p class="korean-text">지금은 고급 레벨이 아니신가요?</p>
+                    <p><span class="speaker">Sera:</span> Not yet.</p>
+                    <p class="korean-text">아직이요.</p>
+                    <p><span class="speaker">Sony:</span> I think you are good at English. I am a total beginner. A total beginner.</p>
+                    <p class="korean-text">저는 영어를 잘하시는 것 같아요. 저는 완전 초보예요. 완전 초보라서요.</p>
+                    <p><span class="speaker">Sera:</span> Thank you. I need more confidence because... have you taken the TOEIC exam? Have you?</p>
+                    <p class="korean-text">감사합니다. 자신감이 더 필요해요. 왜냐하면... 토익 시험 본 적 있으세요? 있으세요?</p>
+                    <p><span class="speaker">Sony:</span> No, I've taken OPIC.</p>
+                    <p class="korean-text">아니요, 오픽(OPIC)이요.</p>
+                    <p><span class="speaker">Sera:</span> OPIC. I was so nervous in front of the monitor.</p>
+                    <p class="korean-text">오픽이요. 모니터 앞에서는 너무 긴장되더라고요.</p>
+                    <p><span class="speaker">Luke:</span> More so than in front of a person? Really? Why? It's a computer.</p>
+                    <p class="korean-text">사람 앞보다요? 정말요? 왜요? 컴퓨터잖아요.</p>
+                </div>
+                <div class="transcript-dialog">
+                    <p><span class="speaker">Luke:</span> How about you two? Are you friends? Not best friends, right?</p>
+                    <p class="korean-text">두 분은 어떠세요? 친구? 절친은 아니죠?</p>
+                    <p><span class="speaker">Ruby:</span> We're best friends. We've known each other since high school.</p>
+                    <p class="korean-text">저희 절친이에요. 저희 고등학교 때부터 친구예요.</p>
+                    <p><span class="speaker">Luke:</span> High school? Wow! But you've never asked her questions in English in your life, right?</p>
+                    <p class="korean-text">고등학교요? 와! 하지만 평생 영어로 물어본 적은 없으시죠, 그렇죠?</p>
+                    <p><span class="speaker">Sera:</span> How was your day yesterday?</p>
+                    <p class="korean-text">어제는 어땠어요?</p>
+                    <p><span class="speaker">Ruby:</span> Yesterday? I drank a lot and I overslept.</p>
+                    <p class="korean-text">어제요? 술을 많이 마셔서 늦잠 잤어요.</p>
+                    <p><span class="speaker">Sera:</span> Where? Where did you go?</p>
+                    <p class="korean-text">어디서요? 어디 갔었어요?</p>
+                    <p><span class="speaker">Ruby:</span> In my town. Around Sungshin Women's University.</p>
+                    <p class="korean-text">저희 동네에서요. 성신여대 근처요.</p>
+                    <p><span class="speaker">Sera:</span> Oh, there are so many izakayas and pochas. I like that area.</p>
+                    <p class="korean-text">아, 거기 이자카야랑 포차가 정말 많아요. 좋아해요.</p>
+                    <p><span class="speaker">Luke:</span> Oh, Bomun. It's near Bomun, right? <span class="korean-text">(한국어) 어, 보문. 보문 근처 맞죠?</span></p>
+                    <p><span class="speaker">Sera:</span> I live in Bomun.</p>
+                    <p class="korean-text">저 보문에 살아요.</p>
+                    <p><span class="speaker">Luke:</span> Oh, really?</p>
+                    <p class="korean-text">오, 정말요?</p>
+                    <p><span class="speaker">Sera:</span> I didn't say Bomun because many people don't know where Bomun is.</p>
+                    <p class="korean-text">보문이라고 말 안 한 게, 많은 사람들이 보문이 어딘지 잘 몰라서요.</p>
+                    <p><span class="speaker">Luke:</span> Where do you guys live?</p>
+                    <p class="korean-text">두 분은 어디 사세요?</p>
+                    <p><span class="speaker">Hyundong:</span> I live in Gangseo. <span class="korean-text">(한국어) 강서요.</span></p>
+                    <p><span class="speaker">Luke:</span> What's your MBTI?</p>
+                    <p class="korean-text">MBTI가 뭐예요?</p>
+                    <p><span class="speaker">Sera:</span> ENFP.</p>
+                    <p class="korean-text">ENFP요.</p>
+                    <p><span class="speaker">Ruby:</span> ENFP?</p>
+                    <p class="korean-text">ENFP요?</p>
+                    <p><span class="speaker">Luke:</span> Wow, I'm an ENFP. See, it's very noticeable, right?</p>
+                    <p class="korean-text">와, 저 ENFP예요. 보세요, 아주 눈에 띄죠?</p>
+                </div>
+                 <div class="transcript-dialog">
+                    <p><span class="speaker">Sony:</span> I'm Sony. This is my English name. Because I'm a fan of Son Heung-min.</p>
+                    <p class="korean-text">저는 소니입니다. 이게 제 영어 이름이에요. 손흥민 팬이라서요.</p>
+                    <p><span class="speaker">Luke:</span> That's rude. Rude to him.</p>
+                    <p class="korean-text">그건 무례한 거예요. 그에게 무례한 거라고요.</p>
+                    <p><span class="speaker">Sony:</span> Well... until last year, I was in China as an expatriate. So I had to choose an English name, but I didn't have one. Since I'm a fan of Son Heung-min, I chose that. I'm 40.</p>
+                    <p class="korean-text">왜냐하면... 작년까지 중국에 주재원(expatriate)으로 있었거든요. 그래서 영어 이름을 정해야 했는데, 영어 이름이 없었어요. 그래서 손흥민 팬이라서 그걸로 정했어요. 저는 40살이에요.</p>
+                    <p><span class="speaker">Ruby:</span> You don't look your age.</p>
+                    <p class="korean-text">그렇게 안 보이세요.</p>
+                    <p><span class="speaker">Sony:</span> Any tips? Nowadays, I work at a cosmetics company. Amorepacific.</p>
+                    <p class="korean-text">팁이요? 요즘 화장품 회사에서 일하거든요. 아모레퍼시픽이요.</p>
+                    <p><span class="speaker">Sera:</span> Recommend something to us.</p>
+                    <p class="korean-text">뭐 좀 추천해주세요.</p>
+                    <p><span class="speaker">Sony:</span> What about the Laneige brand?</p>
+                    <p class="korean-text">라네즈 브랜드는 어때요?</p>
+                    <p><span class="speaker">Luke:</span> What's your department?</p>
+                    <p class="korean-text">어느 부서세요?</p>
+                    <p><span class="speaker">Sony:</span> Ah, strategy. <span class="korean-text">(한국어) 아, 전략이요.</span> My part is related to price. I do research about all prices related to cosmetics.</p>
+                    <p class="korean-text">제 파트는 가격과 관련이 있어요. 화장품과 관련된 모든 가격에 대해 조사를 하죠.</p>
+                    <p><span class="speaker">Sony:</span> I've been there for 13 years. I was just working in China for 3 years. In Shanghai.</p>
+                    <p class="korean-text">13년 동안 일했어요. 중국에서는 3년 동안 일했고요. 상하이에서요.</p>
+                </div>
+                <div class="transcript-dialog">
+                    <p><span class="speaker">Hyundong:</span> I'm Hyundong. I'm from Ulsan. I've lived here for 5 years. I live in Gangseo. My job is an IT engineer, and my workplace is in Pangyo.</p>
+                    <p class="korean-text">저는 현동입니다. 저는 울산에서 왔고요. 여기 산 지 5년 됐어요. 저는 강서에 살고요. 제 직업은 IT 엔지니어고, 직장은 판교에 있어요.</p>
+                    <p><span class="speaker">Hyundong:</span> I really regret that I couldn't study English well when I was young. I don't know the English word for "한".</p>
+                    <p class="korean-text">(한국어) 어렸을 때 영어 공부를 너무 못했다. 그게 너무 한이다. 한은 영어로 몰라.</p>
+                    <p><span class="speaker">Luke:</span> From Ulsan. But your dialect never appears.</p>
+                    <p class="korean-text">울산에서요. 그런데 사투리(dialect)를 전혀 안 쓰시네요.</p>
+                    <p><span class="speaker">Hyundong:</span> Yes, because I am so nervous.</p>
+                    <p class="korean-text">네, 너무 긴장해서 그래요.</p>
+                    <p><span class="speaker">Sera:</span> What do you do in your free time?</p>
+                    <p class="korean-text">여가 시간에 뭐 하세요?</p>
+                    <p><span class="speaker">Hyundong:</span> I run at the Han river. 10km running and push-ups... And then I read a book. Nowadays, I want to study math.</p>
+                    <p class="korean-text">한강에서 달려요. 10km 달리고 팔굽혀펴기... 그리고 책을 읽어요. 요즘은 수학을 공부하고 싶어요.</p>
+                    <p><span class="speaker">Luke:</span> This is your hobby?</p>
+                    <p class="korean-text">이게 당신의 취미라고요?</p>
+                    <p><span class="speaker">Hyundong:</span> Yes.</p>
+                    <p class="korean-text">네.</p>
+                    <p><span class="speaker">Sera:</span> We didn't even study calculus because we were liberal arts majors.</p>
+                    <p class="korean-text">(한국어) 저희는 문과(liberal arts major)라서 미적분(calculus)도 안 배웠어요.</p>
+                </div>
+                <div class="transcript-dialog">
+                    <p><span class="speaker">Luke:</span> I'm a marketer. The reason I do this kind of meeting is that I really love traveling abroad. So recently, I've been meeting my foreign friends from abroad, and I introduce them to Korean places. We use English, so English is very necessary for that.</p>
+                    <p class="korean-text">저는 마케터입니다. 제가 이런 모임을 하는 이유는 해외여행을 정말 좋아하기 때문이에요. 그래서 최근에 해외에서 온 외국인 친구들을 만나고 있는데, 그들에게 한국의 장소들을 소개해주고 있어요. 영어를 쓰기 때문에 그럴 때 영어가 아주 필요하죠.</p>
+                    <p><span class="speaker">Luke:</span> Why is your English so good?</p>
+                    <p class="korean-text">왜 영어를 그렇게 잘하세요?</p>
+                    <p><span class="speaker">Luke:</span> I never studied. I just talked to foreign friends a lot. Maybe starting next year, I will launch my own business.</p>
+                    <p class="korean-text">공부한 적 없어요. 외국인 친구들과 이야기를 많이 했어요. 아마 내년부터 제 사업을 시작할 거예요.</p>
+                    <p><span class="speaker">Sera:</span> You're going to be a CEO?</p>
+                    <p class="korean-text">CEO가 되시는 건가요?</p>
+                    <p><span class="speaker">Luke:</span> Yes. I want to do something related to foreign countries. That's why I need my English to be more skillful.</p>
+                    <p class="korean-text">네. 외국과 관련된 일을 하고 싶어요. 그래서 제 영어가 더 능숙해져야 해요.</p>
+                    <p><span class="speaker">Sony:</span> So can you give me some tips to improve my English speaking skills?</p>
+                    <p class="korean-text">그럼 영어 말하기 실력을 향상시킬 수 있는 팁 좀 주실 수 있나요?</p>
+                    <p><span class="speaker">Luke:</span> Skills? I told you, get a foreign girlfriend. I dated a foreign girlfriend, but not a native English speaker. She was French.</p>
+                    <p class="korean-text">팁이요? 말씀드렸잖아요, 외국인 여자친구를 만나세요. 외국인 여자친구 사귀어 본 적 있는데, 영어가 모국어는 아니었어요. 프랑스 사람이요.</p>
+                    <p><span class="speaker">Sera:</span> So how did you talk with her?</p>
+                    <p class="korean-text">그럼 어떻게 이야기하셨어요?</p>
+                    <p><span class="speaker">Luke:</span> In English and some of it was in Korean. Because she came here to study Korean.</p>
+                    <p class="korean-text">영어랑 그리고 일부는 한국말로요. 왜냐하면 그녀는 한국어를 공부하러 여기에 왔거든요.</p>
+                </div>
+                <div class="transcript-dialog">
+                    <p><span class="speaker">Ruby:</span> I'm Ruby. I work at a trading company and my main job is to import food ingredients from overseas. And also, I like salsa, bachata, merengue.</p>
+                    <p class="korean-text">저는 루비입니다. 저는 무역 회사에서 일하고 있고, 제 주된 업무는 해외에서 식재료를 수입하는 거예요. 그리고 살사, 바차타, 메렝게도 좋아해요.</p>
+                    <p><span class="speaker">Sera:</span> We have the same hobby.</p>
+                    <p class="korean-text">저희 취미가 같네요.</p>
+                    <p><span class="speaker">Sony:</span> I am an INTP, my MBTI is 'I'. Can I try salsa?</p>
+                    <p class="korean-text">저는 INTP인데, 제 MBTI가 I예요. 살사 한번 해볼 수 있을까요?</p>
+                    <p><span class="speaker">Ruby:</span> You can try it too. You need to learn some steps and how to move.</p>
+                    <p class="korean-text">당신도 해볼 수 있어요. 스텝이랑 움직이는 방법을 배워야 해요.</p>
+                    <p><span class="speaker">Sera:</span> The man leads the woman, so I think it's more difficult for men.</p>
+                    <p class="korean-text">남자가 여자를 리드하니까요. 그래서 남자가 더 어렵다고 생각해요.</p>
+                    <p><span class="speaker">Ruby:</span> I've been doing it for almost 6 years. Actually, I think salsa changed my life.</p>
+                    <p class="korean-text">거의 6년 동안 했어요. 사실, 저는 살사가 제 인생을 바꾼 것 같아요.</p>
+                    <p><span class="speaker">Luke:</span> Salsa is bad experience?</p>
+                    <p class="korean-text">살사는 나쁜 경험인가요?</p>
+                    <p><span class="speaker">Ruby:</span> Not bad. Before dancing salsa, I had been a good girl. Just staying at home and reading books, watching anime.</p>
+                    <p class="korean-text">나쁘지 않아요. 살사를 추기 전에는, 저는 착한 아이였어요. 그냥 집에 있으면서 책 읽고, 애니메이션 보고요.</p>
+                </div>
+                 <div class="transcript-dialog">
+                    <p><span class="speaker">Luke:</span> You should see La La Land.</p>
+                    <p class="korean-text">'라라랜드'를 보셔야 해요.</p>
+                    <p><span class="speaker">Ruby:</span> I've watched it more than six times. I was so touched, I couldn't stand up after the movie.</p>
+                    <p class="korean-text">저는 여섯 번 이상 봤어요. 너무 감동받아서, 영화 끝나고 일어설 수가 없었어요.</p>
+                    <p><span class="speaker">Luke:</span> What? You have no emotion. For me, it's just a normal, obvious story.</p>
+                    <p class="korean-text">뭐라고요? 감정이 없으시네요. 저한테는 그냥 평범하고 뻔한 이야기예요.</p>
+                    <p><span class="speaker">Ruby:</span> No! I don't think she is a bad girl. I think she is just a very ambitious girl.</p>
+                    <p class="korean-text">아니에요! 저는 그녀가 나쁜 여자가 아니라고 생각해요. 그냥 야망이 큰 여자죠.</p>
+                    <p><span class="speaker">Luke:</span> But in reality... in my reality, I think that girl is bad.</p>
+                    <p class="korean-text">하지만 현실에서는... 제 현실에서는, 그 여자는 나빠요.</p>
+                    <p><span class="speaker">Sony:</span> I cried. After I watched La La Land, I realized I must be kind to my girlfriend. Actually, I like musicals and concerts, but these days, I can't go because I have a baby. My baby is three years old.</p>
+                    <p class="korean-text">저는 울었어요. '라라랜드'를 보고 나서, 여자친구에게 잘해줘야겠다고 깨달았어요. 사실, 뮤지컬이랑 콘서트를 좋아하는데, 요즘은 아기가 있어서 못 가요. 아기가 세 살이라서...</p>
+                </div>
+                <div class="transcript-dialog">
+                    <p><span class="speaker">Sera:</span> What kind of food do you like?</p>
+                    <p class="korean-text">어떤 종류의 음식을 좋아하세요?</p>
+                    <p><span class="speaker">Sera:</span> I like everything, but I cannot eat beef. It's not delicious.</p>
+                    <p class="korean-text">저는 다 좋아하지만, 소고기는 못 먹어요. 맛이 없어요.</p>
+                    <p><span class="speaker">Luke:</span> Wow. That's why you are fit.</p>
+                    <p class="korean-text">와. 그래서 몸매가 좋으시군요.</p>
+                    <p><span class="speaker">Sera:</span> No. I like pork, I like chicken.</p>
+                    <p class="korean-text">아니에요. 돼지고기 좋아하고, 닭고기 좋아해요.</p>
+                    <p><span class="speaker">Sera:</span> What kind of person do you like?</p>
+                    <p class="korean-text">어떤 종류의 사람을 좋아하세요?</p>
+                    <p><span class="speaker">Sera:</span> I like men who aren't bad guys.</p>
+                    <p class="korean-text">나쁜 남자가 아닌 남자를 좋아해요.</p>
+                    <p><span class="speaker">Luke:</span> Like him. He is a good guy. And you can solve the mathematics for her.</p>
+                    <p class="korean-text">그처럼요. 그는 좋은 사람이에요. 그리고 그녀를 위해 수학 문제를 풀어줄 수 있죠.</p>
+                    <p><span class="speaker">Sera:</span> No, I like it, but I cannot do it.</p>
+                    <p class="korean-text">아니요, 좋아하지만 못 해요.</p>
+                    <p><span class="speaker">Luke:</span> So he can teach you.</p>
+                    <p class="korean-text">그래서 그가 가르쳐줄 수 있어요.</p>
+                </div>
+                 <div class="transcript-dialog">
+                    <p><span class="speaker">Luke:</span> Then why did you break up with her? Your French girlfriend.</p>
+                    <p class="korean-text">그럼 왜 그녀와 헤어졌어요? 프랑스인 여자친구 말이에요.</p>
+                    <p><span class="speaker">Luke:</span> Ah, my French girlfriend... because she went to Canada. It was a long-distance relationship.</p>
+                    <p class="korean-text">아, 프랑스인 여자친구... 그녀가 캐나다로 갔거든요. 장거리 연애였죠.</p>
+                    <p><span class="speaker">Sera:</span> Ah... so you guys... it's a very sad story.</p>
+                    <p class="korean-text">아... 그럼 두 분... 아주 슬픈 이야기네요.</p>
+                    <p><span class="speaker">Luke:</span> Sad story. So that's why you cried when you watched La La Land.</p>
+                    <p class="korean-text">슬픈 이야기죠. 그래서 '라라랜드' 보면서 우셨군요.</p>
+                    <p><span class="speaker">Hyundong:</span> Since we're on the topic of sad stories, something just came to mind... I knew someone a long time ago who had a dog when they were young. The dog passed away. So they buried the dog and went home crying because they were so sad. But suddenly from behind... the dog... came back to life... and followed them.</p>
+                    <p class="korean-text">(한국어) 슬픈 얘기하니까 제가 갑자기 생각나는 게 있는데... 제가 예전에 아는 분이 있었는데, 그분이 어렸을 때 강아지를 키웠대요. 그 강아지가 죽었대요. 그래서 이제 강아지 묻어주고 너무 슬퍼가지고 이렇게 울면서 집에 갔대요. 근데 갑자기 뒤에서... 강아지가... 이렇게... 다시 살아나가지고... 쫓아왔대요.</p>
+                    <p><span class="speaker">Sera:</span> Oh my god!</p>
+                    <p class="korean-text">세상에!</p>
+                    <p><span class="speaker">Luke:</span> What? A horror story.</p>
+                    <p class="korean-text">뭐라고요? 공포 이야기네요.</p>
+                    <p><span class="speaker">Hyundong:</span> They said it was so scary. It was supposed to be a sad story but...</p>
+                    <p class="korean-text">(한국어) 너무 무서웠대요. 슬픈 얘기인데...</p>
+                </div>
+            </div>
+
+            <div id="sera" class="tab-content">
+                <h2>👤 Sera (Participant 1)</h2>
+                <h3>Overall Analysis</h3>
+                <div class="card">
+                    <p>Sera is an excellent communicator who shows a clear desire to improve her English. Her pronunciation is clean and her sentence structure is stable, which shows she is more than ready to leap from an intermediate-high to an advanced level. She leads conversations well and isn't afraid to ask questions, which is a fantastic trait for a language learner.</p>
+                </div>
+
+                <h4>💡 Expressions to Refine (다듬으면 좋을 표현)</h4>
+                <p><strong>"I cannot eat a beef":</strong> This is a very common point of confusion for learners. For meat, produce, and other uncountable nouns, we generally don't use "a" or "an".<br>
+                <strong>Native Alternative:</strong> "I can't eat beef." or "I don't eat beef."</p>
+                <p><strong>"I like a man who is...":</strong> When talking about general preferences for a type of person, it's more natural to use the plural form.<br>
+                <strong>Native Alternative:</strong> "I like men who are..." or "I like guys who are..."</p>
+
+                <h4>🌟 Strengths (잘한 점)</h4>
+                <ul class="check-list">
+                    <li><strong>Solid Grammar and Sentence Structure:</strong> Her sentences are generally grammatically correct and easy to understand. For example, "I can't stay at home for more than two days" is a perfect, natural sentence.</li>
+                    <li><strong>Clear Pronunciation and Delivery:</strong> Her voice is clear and confident, making it easy for listeners to follow along. This is a huge asset in conversation.</li>
+                    <li><strong>Proactive Conversational Skills:</strong> She actively engages others by asking questions like "Have you taken the TOEIC exam?" and "What's your favorite character?", which keeps the conversation flowing and interesting.</li>
+                </ul>
+
+                <h3>📚 Personalized English Tips (개인별 영어 학습 팁)</h3>
+                <div class="card">
+                    <p>Sera already has a strong foundation. To reach the next level, the focus should be on adding sophistication and naturalness to her already accurate English.</p>
+                    <ul class="check-list">
+                        <li><strong>Advanced Shadowing:</strong> When listening to English news or podcasts, pay close attention to the small words: articles (a/the), prepositions (in/on/at), and adverbs (even/just). Mimic not just the content, but the rhythm and use of these "connector" words.</li>
+                        <li><strong>Paraphrasing Practice:</strong> After making a sentence, ask yourself, "How else could I say this?" For example, take "I like kind men" and try rephrasing it as "I'm attracted to men with a kind personality" or "Kindness is a quality I look for in a man." This expands both vocabulary and sentence flexibility.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="sony" class="tab-content">
+                <h2>👤 Sony (Participant 2)</h2>
+                <h3>Overall Analysis</h3>
+                <div class="card">
+                    <p>Sony described himself as a "total beginner," but that's not true at all! He is a thoughtful learner with a strong vocabulary base, especially in a professional context. His biggest hurdle isn't ability, but confidence. With a few key improvements, he can unlock his potential and speak with the assurance his knowledge deserves.</p>
+                </div>
+
+                <h4>💡 Expressions to Refine (다듬으면 좋을 표현)</h4>
+                <p><strong>"I am so beginner":</strong> This phrase can be limiting. It's better to frame your ability as a work in progress.<br>
+                <strong>Native Alternative:</strong> "I'm still learning." or "I'm working on improving my conversational skills."</p>
+                <p><strong>"Why did you choice participating...?":</strong> A common mix-up between the noun "choice" and the verb "choose".<br>
+                <strong>Corrected:</strong> "Why did you **choose to participate**...?"</p>
+
+                <h4>🌟 Strengths (잘한 점)</h4>
+                <ul class="check-list">
+                    <li><strong>Professional Vocabulary:</strong> He accurately uses words like <em>strategy, price, analysis, cosmetics,</em> and <em>expatriate</em>. This shows he can already handle in-depth conversations on certain topics.</li>
+                    <li><strong>Great Listener:</strong> He pays close attention to others and asks relevant follow-up questions, which is the foundation of any good conversation.</li>
+                    <li><strong>Willingness to Try:</strong> He doesn't shy away from complex topics like his lockdown experience in China. This courage to express difficult ideas is how real progress is made.</li>
+                </ul>
+
+                <h3>📚 Personalized English Tips (개인별 영어 학습 팁)</h3>
+                <div class="card">
+                    <p>Sony's main goal should be building confidence. Focusing on a few high-impact grammar points will make his English sound much more natural, which will in turn boost his confidence.</p>
+                    <ul class="check-list">
+                        <li><strong>Master the Golden Rule: -ing vs. -ed:</strong> This is crucial. Things (a movie, a place) are **boring** or **interesting**. People feel **bored** or **interested**. (e.g., "Okinawa was a bit boring, so I felt bored.")</li>
+                        <li><strong>Focus on Simple, Correct Sentences:</strong> Instead of trying to say everything at once, break it down. For example: "The average age at my company is increasing. So, we have many senior colleagues." Short, successful sentences build momentum and confidence.</li>
+                        <li><strong>Positive Self-Talk:</strong> Avoid calling yourself a "beginner." You are a "learner" and an "improver." This simple mindset shift can make a huge difference.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="luke" class="tab-content">
+                <h2>👤 Luke (Participant 3)</h2>
+                <h3>Overall Analysis</h3>
+                <div class="card">
+                    <p>Luke is a very confident and fluent English speaker who excels at leading conversations. He has a strong command of the language and isn't afraid to express his thoughts, which is fantastic. His level is already high, and the feedback below is aimed at refining his English to near-native perfection.</p>
+                </div>
+
+                <h4>💡 Expressions to Refine (다듬으면 좋을 표현)</h4>
+                <p><strong>"I haven't never participated...":</strong> A common slip-up called a double negative. In standard English, you only need one negative word.<br>
+                <strong>Native Alternative:</strong> "I have **never** participated..." or "I **haven't ever** participated..."</p>
+                <p><strong>"Just a normal, obvious story":</strong> While "obvious" works, other words are more common for describing predictable plots.<br>
+                <strong>Native Alternative:</strong> "It's just a typical, **cliché** story." or "It's a pretty **predictable** story."</p>
+
+                <h4>🌟 Strengths (잘한 점)</h4>
+                <ul class="check-list">
+                    <li><strong>Excellent Fluency and Confidence:</strong> He drives the conversation forward and engages everyone. His ability to speak at length without hesitation is a clear sign of an advanced learner.</li>
+                    <li><strong>Rich Vocabulary:</strong> He uses a great range of words like <em>systematic, curriculum, noticeable,</em> and <em>ambitious</em>, which elevates the quality of the conversation.</li>
+                    <li><strong>Strong Communication Skills:</strong> Even with occasional minor errors, his message is always 100% clear thanks to his confident delivery and expressive tone.</li>
+                </ul>
+
+                <h3>📚 Personalized English Tips (개인별 영어 학습 팁)</h3>
+                <div class="card">
+                    <p>Luke is past the "learning" stage and is now in the "refining" stage. The key to reaching the next level is to focus on the small details that separate a fluent speaker from a native-sounding one.</p>
+                    <ul class="check-list">
+                        <li><strong>Self-Correction Through Recording:</strong> Record yourself speaking for a few minutes. When you listen back, you'll likely catch small, "fossilized" errors yourself, like saying "doesn't" instead of "don't". This is a powerful way to eliminate those minor mistakes.</li>
+                        <li><strong>Pay Attention to Prepositions:</strong> Focus on common pairings. For example, it's "rude **to** someone," not "rude for someone." Learning these as chunks (e.g., "interested **in**," "good **at**") is highly effective.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="ruby" class="tab-content">
+                 <h2>👤 Ruby (Participant 4)</h2>
+                <h3>Overall Analysis</h3>
+                <div class="card">
+                    <p>Ruby's English is full of life and emotion! She has a wonderful ability to convey her feelings and tell a story, which is a skill that goes beyond simple language proficiency. Her passion, especially when talking about salsa, is contagious and makes her a very engaging speaker.</p>
+                </div>
+
+                <h4>💡 Expressions to Refine (다듬으면 좋을 표현)</h4>
+                <p><strong>"I, I drunk a lot...":</strong> This is one of the most common verb mistakes in English! The simple past tense of "drink" is "drank".<br>
+                <strong>Corrected:</strong> "I **drank** a lot..."</p>
+                <p><strong>"My work needs me using the English a lot":</strong> The structure is a bit unnatural. There are simpler, more direct ways to say this.<br>
+                <strong>Native Alternative:</strong> "My work **requires me to use** English a lot." or, more simply, "I **need to use** English a lot for my work."</p>
+
+                <h4>🌟 Strengths (잘한 점)</h4>
+                <ul class="check-list">
+                    <li><strong>Powerful and Expressive Language:</strong> Her statement, "It changed my life," was delivered with such sincerity that it was incredibly impactful. The ability to convey emotion is a true gift.</li>
+                    <li><strong>Successful Use of Advanced Grammar:</strong> In the sentence, "Before dancing salsa, I **had been** a good girl," she used the past perfect tense perfectly to describe a state that existed before another past action. This is a high-level skill!</li>
+                    <li><strong>Storytelling Ability:</strong> She weaves her experiences—from learning salsa in Japan to the boredom of office work—into a compelling narrative that draws the listener in.</li>
+                </ul>
+
+                <h3>📚 Personalized English Tips (개인별 영어 학습 팁)</h3>
+                <div class="card">
+                    <p>Ruby's expressive style is her superpower. To make it even more effective, the next step is to strengthen her grammatical foundation, particularly with verb forms. This will give her a solid stage on which her stories can shine.</p>
+                    <ul class="check-list">
+                        <li><strong>Create a "Verb Cheat Sheet":</strong> Pick 10-15 verbs you often use but find tricky (e.g., drink-drank-drunk, go-went-gone, begin-began-begun). Write them down and review them for a few minutes each day. This will help the correct forms become automatic.</li>
+                        <li><strong>Record Your Stories:</strong> Just like with her salsa story, pick a topic you're passionate about and record a one-minute speech in English. Listen back and try to catch any verb tense mistakes. Self-correction is a powerful tool.</li>
+                        <li><strong>Practice with Sera:</strong> Since you're best friends, you can be best English partners! Make a fun game of gently correcting each other's small mistakes during conversation. This creates a supportive and motivating learning environment.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="hyundong" class="tab-content">
+                <h2>👤 Hyundong (Participant 5)</h2>
+                <h3>Overall Analysis</h3>
+                <div class="card">
+                    <p>Hyundong introduced himself as shy, but his courage to participate and share his thoughts in English was truly impressive. That bravery is the most important ingredient for learning a language. He has a clear motivation and is at the exciting stage of building a strong foundation for his English skills.</p>
+                </div>
+
+                <h4>💡 Expressions to Refine (다듬으면 좋을 표현)</h4>
+                <p><strong>"I my job is IT engineer":</strong> This sentence has two subjects ("I" and "my job"). The key is to choose one and build the sentence from there.<br>
+                <strong>Corrected:</strong> "**I am** an IT engineer." or "**My job is** an IT engineer."</p>
+                <p><strong>"I running at Han river":</strong> To talk about a regular habit, we use the simple present tense.<br>
+                <strong>Corrected:</strong> "I **run** at the Han River."</p>
+
+                <h4>🌟 Strengths (잘한 점)</h4>
+                <ul class="check-list">
+                    <li><strong>Clear Motivation:</strong> His desire to speak with people while traveling is a powerful goal that will fuel his learning journey.</li>
+                    <li><strong>Courage to Express Passions:</strong> Despite being shy, he talked about his hobbies like running, math, and especially 'Demon Slayer'. Speaking about things you love is the fastest way to learn.</li>
+                    <li><strong>Diligent Attitude:</strong> He was actively thinking about how to translate words and listened carefully to others. This learner's mindset is his greatest asset.</li>
+                </ul>
+
+                <h3>📚 Personalized English Tips (개인별 영어 학습 팁)</h3>
+                <div class="card">
+                    <p>Hyundong is at the perfect stage to focus on the fundamental building blocks of English. Mastering the basic sentence structure will give him a solid base to build upon, dramatically increasing his confidence.</p>
+                    <ul class="check-list">
+                        <li><strong>Use "Sentence Recipes" 🍳:</strong> Forget complex sentences for now. Practice making simple, correct ones. Start with a basic recipe: [Subject: I] + [Verb: like] + [Object: anime]. Repeat this with different words: "I run 10km." "I study math." "I watch movies." Mastering this basic structure is the most important first step.</li>
+                        <li><strong>Learn with Your Hobbies:</strong> Since you love 'Demon Slayer', find English reviews of it on YouTube or read fan discussions on sites like Reddit. When you learn with topics you enjoy, it doesn't feel like studying.</li>
+                        <li><strong>One Goal at a Time:</strong> Don't try to fix everything at once. This week, just focus on the "Subject + Verb" rule. Next week, focus on talking about your hobbies using that rule. Small, consistent wins will build a big victory.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId, element) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            const selectedContent = document.getElementById(tabId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            if (element) {
+                element.classList.add('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstButton = document.querySelector('.tab-button');
+            if (firstButton) {
+                showTab(firstButton.id.replace('btn-', ''), firstButton);
+            }
+            // Make the first tab active by default
+            showTab('transcript', document.querySelector('.tab-button'));
+        });
+    </script>
+
+</body>
+</html>
