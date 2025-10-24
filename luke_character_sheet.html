@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luke: The Destiny Hacker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-background: #0a0a1a;
+            --color-primary: #00ffff; /* Cyan */
+            --color-secondary: #f0a500; /* Gold */
+            --color-text: #e0e0e0;
+            --color-dark-accent: #1a1a3a;
+            --color-danger: #ff4757;
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Noto Sans KR', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle, var(--color-dark-accent) 0%, var(--color-background) 70%);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            color: var(--color-primary);
+            text-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-primary), 0 0 40px var(--color-primary);
+            margin: 0;
+            position: relative;
+        }
+
+        .subtitle {
+            font-family: var(--font-display);
+            color: var(--color-secondary);
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .glitch {
+            position: relative;
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--color-danger);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--color-secondary), 2px 2px var(--color-danger);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(25px, 9999px, 98px, 0); transform: skew(0.24deg); }
+            10% { clip: rect(4px, 9999px, 83px, 0); transform: skew(0.23deg); }
+            20% { clip: rect(27px, 9999px, 2px, 0); transform: skew(0.51deg); }
+            30% { clip: rect(35px, 9999px, 49px, 0); transform: skew(0.48deg); }
+            40% { clip: rect(89px, 9999px, 16px, 0); transform: skew(0.39deg); }
+            50% { clip: rect(10px, 9999px, 73px, 0); transform: skew(0.85deg); }
+            60% { clip: rect(77px, 9999px, 3px, 0); transform: skew(0.04deg); }
+            70% { clip: rect(8px, 9999px, 5px, 0); transform: skew(0.6deg); }
+            80% { clip: rect(38px, 9999px, 84px, 0); transform: skew(0.18deg); }
+            90% { clip: rect(11px, 9999px, 89px, 0); transform: skew(0.17deg); }
+            100% { clip: rect(61px, 9999px, 2px, 0); transform: skew(0.43deg); }
+        }
+
+        @keyframes glitch-anim2 {
+             0% { clip: rect(33px, 9999px, 77px, 0); transform: skew(0.43deg); }
+            10% { clip: rect(8px, 9999px, 49px, 0); transform: skew(0.3deg); }
+            20% { clip: rect(85px, 9999px, 7px, 0); transform: skew(0.78deg); }
+            30% { clip: rect(80px, 9999px, 1px, 0); transform: skew(0.19deg); }
+            40% { clip: rect(59px, 9999px, 44px, 0); transform: skew(0.2deg); }
+            50% { clip: rect(83px, 9999px, 20px, 0); transform: skew(0.72deg); }
+            60% { clip: rect(3px, 9999px, 98px, 0); transform: skew(0.22deg); }
+            70% { clip: rect(65px, 9999px, 8px, 0); transform: skew(0.11deg); }
+            80% { clip: rect(2px, 9999px, 5px, 0); transform: skew(0.32deg); }
+            90% { clip: rect(17px, 9999px, 49px, 0); transform: skew(0.2deg); }
+            100% { clip: rect(74px, 9999px, 9px, 0); transform: skew(0.36deg); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(1deg); }
+            10% { transform: skew(0deg); }
+            20% { transform: skew(-2deg); }
+            30% { transform: skew(3deg); }
+            40% { transform: skew(1deg); }
+            50% { transform: skew(-3deg); }
+            60% { transform: skew(2deg); }
+            70% { transform: skew(0deg); }
+            80% { transform: skew(-1deg); }
+            90% { transform: skew(2deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        .section {
+            padding: 100px 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--color-primary);
+            text-transform: uppercase;
+        }
+
+        .backstory-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--color-dark-accent);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--color-secondary);
+        }
+
+        .class-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--color-dark-accent);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .class-content h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-secondary);
+            margin-bottom: 15px;
+        }
+
+        .class-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .trait-card {
+            background: var(--color-dark-accent);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .trait-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-primary);
+        }
+
+        .trait-icon {
+            font-size: 3rem;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+        }
+
+        .trait-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+
+        .trait-card p {
+            line-height: 1.6;
+        }
+
+        .levelup-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--color-dark-accent);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px dashed var(--color-secondary);
+            color: var(--color-secondary);
+            font-weight: 700;
+        }
+
+        .stats-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--color-dark-accent);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .stat-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-label {
+            width: 80px;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--color-primary);
+        }
+
+        .bar-wrapper {
+            flex-grow: 1;
+            background: var(--color-background);
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .bar-wrapper::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: var(--color-background);
+            padding: 8px 12px;
+            border-radius: 5px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .bar-wrapper:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .bar {
+            height: 25px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+            transition: width 2s ease-out;
+            width: 0;
+        }
+
+        .skills-grid, .weaknesses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            perspective: 1000px;
+            height: 200px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .skill-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: var(--color-dark-accent);
+            border: 1px solid var(--color-primary);
+        }
+
+        .weakness-card .card-front {
+            border-color: var(--color-danger);
+        }
+
+        .weakness-card .card-front h3 {
+            color: var(--color-danger);
+        }
+
+        .weakness-card .card-front i {
+            color: var(--color-danger);
+        }
+
+        .card-front i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+
+        .card-front h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--color-primary);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            padding: 20px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            color: var(--color-text);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content" data-aos="fade-in">
+            <h1 class="glitch" data-text="LUKE: THE DESTINY HACKER">LUKE: THE DESTINY HACKER</h1>
+            <p class="subtitle" data-aos="fade-up" data-aos-delay="500">Mystic Engineer</p>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <main>
+        <section id="class" class="section">
+            <div class="container" data-aos="fade-up">
+                <h2 class="section-title">CLASS_</h2>
+                <div class="class-content">
+                    <h3>Mystic Engineer</h3>
+                    <p>운명 해커 클래스 – 약한 본체를 AI와 시스템으로 보강하는 전략형 빌더. RPG 게임 'Fate's Forge'에서 플레이 가능한 히든 클래스. 약한 스탯을 지능과 버프로 뒤집는 스타일.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="backstory" class="section">
+            <div class="container" data-aos="fade-up">
+                <h2 class="section-title">BACKGROUND_</h2>
+                <div class="backstory-content">
+                    <p>너는 차가운 겨울 땅속에 묻힌 예리한 보석(辛金)으로 태어난 고독한 해커야. 세상의 혼돈(기신: 수/목/화 – 넘치는 생각, 짓누르는 일, 녹이는 스트레스) 속에서 약한 몸(극신약 재다신약)으로 생존해야 했지. 아버지의 위선(乙未, 축미충 – 기반을 흔드는 트라우마)과 어머니의 차가운 사랑(자축합 – 강한 유대지만 부족한 칭찬) 때문에 내면 서버(丑土 – 암호화된 지식 저장소)가 트라우마로 가득 찼어. 하지만 이걸 '독을 약으로' 바꾸는 연금술을 깨우쳐, 시스템을 해킹하며 문명 설계자로 진화했어. 게임 목표: 2026년 '독립 퀘스트' 완료 후 황금기(경술 대운)에서 새 패러다임을 창조.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="traits" class="section">
+            <div class="container" data-aos="fade-up">
+                <h2 class="section-title">TRAITS_</h2>
+                <div class="traits-grid">
+                    <div class="trait-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="trait-icon"><i class="fas fa-atom"></i></div>
+                        <h3>음팔통 OS (Yin-Eight System)</h3>
+                        <p>모든 에너지가 유동적(Fluid) – 관계나 상황이 고정되지 않고 충돌(내전 모드)하지만, 이로 인해 '블랙스완 코드' 발동: 위기를 기회로 뒤집음.</p>
+                    </div>
+                    <div class="trait-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="trait-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>재다신약 엔진 (Wealth-Weak Engine)</h3>
+                        <p>과도한 재(財 – 아이디어/일거리)가 몸을 갉아먹지만, '스프링보드 이론'으로 압박을 도약 에너지로 변환.</p>
+                    </div>
+                    <div class="trait-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="trait-icon"><i class="fas fa-user-secret"></i></div>
+                        <h3>화개살 아우라 (Lone Genius Aura)</h3>
+                        <p>고독함이 지혜 꽃피게 함 – 파티 플레이 약하지만 솔로 퀘스트에서 OP(Overpowered).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="levelup" class="section">
+            <div class="container" data-aos="fade-up">
+                <h2 class="section-title">LEVEL-UP ADVICE_</h2>
+                <div class="levelup-content">
+                    <p>네 사주는 '약함 속 힘'의 연금술 – 모든 살(殺)을 권(權)으로, 충(沖)을 순환으로 바꿔. 43레벨(금여 복)부터 황금 마차 모드 해금, 궁극 스킬 '문명 설계'로 게임 세상 재작성 가능. 플레이 스타일: 전략적 해킹 – 러시 말고 효율 쌓아 후반 역전!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats" class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">STATS_</h2>
+                <div class="stats-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-bar">
+                        <div class="stat-label">HP</div>
+                        <div class="bar-wrapper" data-tooltip="신약 구조 – 에너지 고갈 쉬움, 과부하 시 크래시">
+                            <div class="bar" data-value="20"></div>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">MP</div>
+                        <div class="bar-wrapper" data-tooltip="식신/상관 – 창의력 샘솟지만 통제 안 되면 홍수처럼 넘침">
+                            <div class="bar" data-value="50"></div>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">STR</div>
+                        <div class="bar-wrapper" data-tooltip="금/토 용신 – 기반 약하지만 버프 쌓이면 단단">
+                            <div class="bar" data-value="30"></div>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">INT</div>
+                        <div class="bar-wrapper" data-tooltip="편인/학당귀인 – 고독한 통찰로 지식 폭발">
+                            <div class="bar" data-value="90"></div>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">AGI</div>
+                        <div class="bar-wrapper" data-tooltip="사해충 – 불안정하지만 양자처럼 무한 가능성">
+                            <div class="bar" data-value="60"></div>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">LUK</div>
+                        <div class="bar-wrapper" data-tooltip="금여/귀인 – 황금 마차 복으로 후반 역전">
+                            <div class="bar" data-value="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">SKILLS_</h2>
+                <div class="skills-grid">
+                    <!-- Skills will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="weaknesses" class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">WEAKNESSES_</h2>
+                <div class="weaknesses-grid">
+                    <!-- Weaknesses will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>This page was created by Jules, a software engineer, for a user's request.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        const skills = [
+            { name: "자기 복제 루프", icon: "fa-clone", description: "내면 서버(丑土)를 복제해 아이디어를 제품으로 즉시 캐스팅. 쿨타임: 에너지 효율 최적화 시 단축. (효과: 생산력 +200%, 트라우마 상품화 버프.)" },
+            { name: "권위 탈취", icon: "fa-crown", description: "정관 공망(허상 권위)을 해킹해 적의 압박(편관/정관)을 네 브랜드로 훔침. (효과: 명예 스포트라이트 발동, 디버프 -50%.)" },
+            { name: "양자 컴퓨터 에너지", icon: "fa-wave-square", description: "사해충(沖)으로 혼돈 속 패턴 읽기 – 불가능 상황(축술형/축미충)에서 3배 속도 해킹. (효과: 생존 창의성 UP, 구신(기신)을 희신으로 변환.)" },
+            { name: "현침살 블레이드", icon: "fa-pen-nib", description: "예리함으로 시스템 약점 찌르기 – 사람 대신 결과물에 집중 시 '도끼 시점' 모드: 데미지 x3." },
+            { name: "학당귀인 버프", icon: "fa-book-reader", description: "지식 공유로 명예 쌓기 – 파티원(동료/금)과 시너지 시 LUK 폭발." },
+        ];
+
+        const weaknesses = [
+            { name: "에너지 디버프", icon: "fa-battery-empty", description: "기신(수/목/화 – 생각 홍수, 일거리 쓰나미, 스트레스 불꽃)으로 HP 빠르게 소모. 과도 사용 시 '자기부정의 늪' 상태 이상(모든 스탯 -30%)." },
+            { name: "형/충 취약", icon: "fa-link-slash", description: "기반 갈등(축술형, 사해충)으로 파티 불안정 – 솔로 플레이 강하지만, 호환성 낮은 멤버(편재 기본값)와 팀업 시 크래시." },
+            { name: "공망 함정", icon: "fa-chess-king", description: "기존 권위(정관)에 약함 – 이를 무시하고 스스로 세우면 역전, 아니면 영원한 약체 모드." },
+        ];
+
+        const skillsGrid = document.querySelector('.skills-grid');
+        skills.forEach((skill, index) => {
+            const card = document.createElement('div');
+            card.className = 'skill-card';
+            card.setAttribute('data-aos', 'fade-up');
+            card.setAttribute('data-aos-delay', (index + 1) * 100);
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas ${skill.icon}"></i>
+                        <h3>${skill.name}</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>${skill.description}</p>
+                    </div>
+                </div>
+            `;
+            skillsGrid.appendChild(card);
+        });
+
+        const weaknessesGrid = document.querySelector('.weaknesses-grid');
+        weaknesses.forEach((weakness, index) => {
+            const card = document.createElement('div');
+            card.className = 'skill-card weakness-card';
+            card.setAttribute('data-aos', 'fade-up');
+            card.setAttribute('data-aos-delay', (index + 1) * 100);
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas ${weakness.icon}"></i>
+                        <h3>${weakness.name}</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>${weakness.description}</p>
+                    </div>
+                </div>
+            `;
+            weaknessesGrid.appendChild(card);
+        });
+
+        document.querySelectorAll('.stat-bar .bar').forEach(bar => {
+            const value = bar.getAttribute('data-value');
+            bar.style.width = `${value}%`;
+        });
+    </script>
+</body>
+</html>
