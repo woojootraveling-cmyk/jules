@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컨텐츠 마케팅 전략 & 실행계획</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-red: #E63946;
+            --color-orange: #F9844A;
+            --color-gold: #FCA311;
+            --color-offwhite: #F1FAEE;
+            --color-dark: #1D3557;
+            --font-display: 'Bebas Neue', cursive;
+            --font-body: 'Black Han Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-dark);
+            color: var(--color-offwhite);
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Slide Section */
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px;
+            border-bottom: 2px solid var(--color-gold);
+        }
+
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 10vw, 6rem);
+            line-height: 1.1;
+            color: var(--color-offwhite);
+            text-shadow: 0 0 20px rgba(0,0,0,0.7);
+            margin-bottom: 20px;
+        }
+
+        .slide-title .highlight {
+            color: var(--color-orange);
+            display: block;
+            font-size: clamp(4rem, 12vw, 8rem);
+        }
+
+        .slide p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--color-offwhite);
+            font-weight: 700;
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -15px); }
+            60% { transform: translate(-50%, -7px); }
+        }
+
+        /* Specific Slide Styles & Theming */
+        #slide-0 { background: linear-gradient(45deg, #1D3557, #457B9D); }
+        #slide-1 { --theme-color: #FCA311; background: linear-gradient(45deg, #2a4266, #3b5a8a); }
+        #slide-2 { --theme-color: #E63946; background: linear-gradient(45deg, #38557e, #4c72a8); }
+        #slide-3 { --theme-color: #F9844A; background: linear-gradient(45deg, #466996, #5d8bc9); }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 0 40px -10px var(--theme-color, var(--color-gold));
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--theme-color, var(--color-gold));
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--theme-color, var(--color-gold));
+        }
+
+        .card ul { list-style: none; padding-left: 0; }
+        .card li { margin-bottom: 15px; line-height: 1.7; padding-left: 25px; position: relative; }
+        .card li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            color: var(--theme-color, var(--color-orange));
+        }
+
+        .flow-diagram {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            text-align: center;
+            border: 1px solid var(--theme-color, var(--color-gold));
+            box-shadow: 0 0 20px inset var(--theme-color, var(--color-gold));
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        th {
+            background-color: rgba(0,0,0,0.3);
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--theme-color, var(--color-red));
+        }
+
+        .emoji-title {
+            font-size: clamp(4rem, 10vw, 6rem);
+            display: block;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px var(--theme-color, white);
+            animation: emoji-glow 2s infinite alternate;
+        }
+
+        @keyframes emoji-glow {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        #slide-3 .slide-title .emoji-title {
+            animation: emoji-flicker 3s infinite alternate;
+        }
+
+        @keyframes emoji-flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--theme-color, #ff4800),
+                0 0 30px var(--theme-color, #ff4800),
+                0 0 40px var(--theme-color, #ff4800);
+            }
+            20%, 24%, 55% { text-shadow: none; }
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-offwhite);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <!-- Slide 0: Title -->
+    <section class="slide" id="slide-0">
+        <div class="container">
+            <h1 class="slide-title" data-aos="zoom-in">
+                컨텐츠 마케팅
+                <span class="highlight">전략 & 실행계획</span>
+            </h1>
+        </div>
+        <div class="scroll-down">Scroll Down ▽</div>
+    </section>
+
+    <!-- Slide 1: Zombie Channel System -->
+    <section class="slide" id="slide-1">
+        <div class="container">
+            <h2 class="slide-title" data-aos="fade-right">
+                <span class="emoji-title">🏆</span>
+                좀비 채널 시스템
+            </h2>
+            <p data-aos="fade-right" data-aos-delay="100">
+                기존 영상을 재활용하여 최소한의 공수로 새로운 가치를 창출하는 '재활용 증식' 전략입니다.
+            </p>
+            <div class="content-grid">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>🚀 핵심 컨셉</h3>
+                    <p>하PD/지은PD가 만든 기존 영상(현재 1회용 폐기)을 살려서, 앞단 3~6초 후킹만 갈아 끼우고 서브 채널 5~6개에 뿌리는 전략</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>✨ 왜 S급인가?</h3>
+                    <ul>
+                        <li>제작비: 0원</li>
+                        <li>편집 공수: 캡컷/스마트폰으로 5분</li>
+                        <li>업로드: 본 채널과 2~3일 시차</li>
+                        <li>중복 회피: 후킹 영상 교체 + 시간 분산</li>
+                    </ul>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>🎣 후킹 소재</h3>
+                    <ul>
+                        <li>✅ 탈모/대머리 (40~60대 공감)</li>
+                        <li>✅ 성적인 암시 (간접적)</li>
+                        <li>❌ 19금 여성 이미지 (위험!)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flow-diagram" data-aos="zoom-in" data-aos-delay="500">
+하PD/지은 영상 제작 → 당일 용주님께 카톡 전달 →
+후킹 영상 붙이기 → 2~3일 뒤 서브 채널 예약 업로드
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Fan Comment Project -->
+    <section class="slide" id="slide-2">
+        <div class="container">
+            <h2 class="slide-title" data-aos="fade-left">
+                <span class="emoji-title">🎯</span>
+                팬심 댓글 영업 "한번더"
+            </h2>
+            <p data-aos="fade-left" data-aos-delay="100">
+                공식 계정으로 인플루언서에게 '팬'으로 접근하여, 거부감 없이 브랜드를 노출하고 협찬까지 연결하는 침투 전략.
+            </p>
+            <table data-aos="fade-up" data-aos-delay="200">
+                <thead>
+                    <tr>
+                        <th>❌ 공격형 (거부감↑)</th>
+                        <th>✅ 팬심형 (호감↑)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-aos="fade-up" data-aos-delay="300">
+                        <td>"발기부전이시죠?"</td>
+                        <td>"대한민국 1% 비주얼.. 저희가 도울 일 있으면 말씀주세요 :)"</td>
+                    </tr>
+                    <tr data-aos="fade-up" data-aos-delay="400">
+                        <td>"협찬 드릴게요"</td>
+                        <td>"강철 체력 대박! 저희 오빠한번더가 '한번더' 응원합니다!"</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="content-grid" style="margin-top: 40px;">
+                <div class="card" data-aos="fade-up" data-aos-delay="500">
+                    <h3>🎯 타겟 선정</h3>
+                    <ul>
+                       <li>몸 좋은 헬스/운동 계정</li>
+                       <li>관종 성향 강한 인플루언서</li>
+                    </ul>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="600">
+                    <h3>🤝 협찬 연계 (송비 담당)</h3>
+                    <ul>
+                        <li>월 1~3명 제품 1개 제공</li>
+                        <li>피드 or 스토리 1회 게시 요청</li>
+                        <li>DM으로 부담 없이 접근</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Love and War Caption -->
+    <section class="slide" id="slide-3">
+        <div class="container">
+            <h2 class="slide-title" data-aos="fade-up">
+                <span class="emoji-title">🔥</span>
+                사랑과 전쟁 캡션
+            </h2>
+            <p data-aos="fade-up" data-aos-delay="100">
+                50대 이상 기혼자를 타겟으로, '막장 스토리' 캡션을 활용해 폭발적인 반응을 유도하는 자극적 콘텐츠 전략.
+            </p>
+            <div class="content-grid">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>📈 왜 이게 먹히나?</h3>
+                    <p>결혼 내 "잘 살아보자" 콘텐츠는 판타지가 없어 조회수가 낮지만, 외도/바람/이혼 등 자극적인 소재는 높은 조회수를 기록하는 '떡상 공식'을 따릅니다.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>📚 소재 풀</h3>
+                    <ul>
+                        <li>사랑과 전쟁 유튜브</li>
+                        <li>이혼 숙려 캠프 콘텐츠</li>
+                        <li>막장 드라마 스토리라인</li>
+                    </ul>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>🤖 AI 활용</h3>
+                    <p>사랑과 전쟁 스타일의 스토리를 AI로 무한 생성하고, 퀴즈형/반전형으로 템플릿화하여 양산 체계를 구축합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Marketing Strategy Presentation</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: false,
+            offset: 100,
+        });
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_opacity": 1
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
